@@ -16,7 +16,6 @@ const images = [
 ];
 
 
-
 /* =========================================
    ตัวแปร
 ========================================= */
@@ -26,12 +25,9 @@ let currentImage = 0;
 let touchStartX = 0;
 let touchEndX = 0;
 
-let slideshowOpened = false;
-
-
 
 /* =========================================
-   เริ่ม Countdown
+   เริ่มต้น
 ========================================= */
 
 document.addEventListener(
@@ -48,169 +44,102 @@ document.addEventListener(
 );
 
 
-
 /* =========================================
-   Countdown
+   Countdown 3 2 1
 ========================================= */
 
 function startCountdown() {
 
     const countdown =
-        document.getElementById(
-            "countdown"
-        );
+        document.getElementById("countdown");
 
     const countdownArea =
-        document.getElementById(
-            "countdownArea"
-        );
+        document.getElementById("countdownArea");
 
     const birthdayContent =
-        document.getElementById(
-            "birthdayContent"
-        );
-
+        document.getElementById("birthdayContent");
 
     let number = 3;
 
-
-    countdown.textContent =
-        number;
+    countdown.textContent = number;
 
 
-    const timer =
-        setInterval(
-            () => {
+    const timer = setInterval(() => {
 
-                number--;
+        number--;
 
+        if (number > 0) {
 
-                if (number > 0) {
+            countdown.textContent = number;
 
-                    countdown.textContent =
-                        number;
+            countdown.style.animation = "none";
 
+            void countdown.offsetWidth;
 
-                    /* restart animation */
+            countdown.style.animation =
+                "countdownPop .8s ease";
 
-                    countdown.style.animation =
-                        "none";
+        } else {
 
-                    void countdown.offsetWidth;
+            clearInterval(timer);
 
-                    countdown.style.animation =
-                        "countdownPop .8s ease";
+            countdownArea.classList.add("hidden");
 
-                }
+            birthdayContent.classList.remove("hidden");
 
+        }
 
-                else {
-
-                    clearInterval(timer);
-
-
-                    countdownArea.classList.add(
-                        "hidden"
-                    );
-
-
-                    birthdayContent.classList.remove(
-                        "hidden"
-                    );
-
-                }
-
-            },
-            1000
-        );
+    }, 1000);
 }
 
 
-
 /* =========================================
-   ปุ่มต่าง ๆ
+   ปุ่ม
 ========================================= */
 
 function setupButtons() {
 
-
-    /* เปิดสมุด */
-
-    const bookButton =
-        document.getElementById(
-            "startSlideshow"
+    document
+        .getElementById("startSlideshow")
+        .addEventListener(
+            "click",
+            openSlideshow
         );
 
 
-    bookButton.addEventListener(
-        "click",
-        openSlideshow
-    );
-
-
-
-    /* เปิดจดหมาย */
-
-    const letterButton =
-        document.getElementById(
-            "openLetter"
+    document
+        .getElementById("openLetter")
+        .addEventListener(
+            "click",
+            openLetter
         );
 
 
-    letterButton.addEventListener(
-        "click",
-        openLetter
-    );
-
-
-
-    /* เปิดหน้าหัวใจ */
-
-    const heartButton =
-        document.getElementById(
-            "showHeart"
+    document
+        .getElementById("showHeart")
+        .addEventListener(
+            "click",
+            openEnding
         );
-
-
-    heartButton.addEventListener(
-        "click",
-        openEnding
-    );
 
 }
-
 
 
 /* =========================================
    เปลี่ยนหน้า
 ========================================= */
 
-function changeScreen(
-    current,
-    next
-) {
+function changeScreen(current, next) {
 
-    const currentElement =
-        document.getElementById(
-            current
-        );
+    document
+        .getElementById(current)
+        .classList.add("hidden");
 
-    const nextElement =
-        document.getElementById(
-            next
-        );
-
-
-    currentElement.classList.add(
-        "hidden"
-    );
-
-    nextElement.classList.remove(
-        "hidden"
-    );
+    document
+        .getElementById(next)
+        .classList.remove("hidden");
 
 }
-
 
 
 /* =========================================
@@ -219,15 +148,12 @@ function changeScreen(
 
 function openSlideshow() {
 
-
     changeScreen(
         "homeScreen",
         "slideshowScreen"
     );
 
-
     currentImage = 0;
-
 
     showImage(
         currentImage,
@@ -235,7 +161,6 @@ function openSlideshow() {
     );
 
 }
-
 
 
 /* =========================================
@@ -253,12 +178,10 @@ function showImage(
             "slidePhoto"
         );
 
-
     const counter =
         document.getElementById(
             "slideCounter"
         );
-
 
     const slider =
         document.getElementById(
@@ -266,9 +189,7 @@ function showImage(
         );
 
 
-    image.classList.remove(
-        "show"
-    );
+    image.classList.remove("show");
 
 
     if (animate) {
@@ -277,7 +198,6 @@ function showImage(
             "page-next",
             "page-prev"
         );
-
 
         void slider.offsetWidth;
 
@@ -288,9 +208,7 @@ function showImage(
                 "page-next"
             );
 
-        }
-
-        else {
+        } else {
 
             slider.classList.add(
                 "page-prev"
@@ -301,25 +219,18 @@ function showImage(
     }
 
 
-    setTimeout(
-        () => {
+    setTimeout(() => {
 
-            image.src =
-                `assets/images/${images[index]}`;
+        image.src =
+            `assets/images/${images[index]}`;
 
+        image.onload = () => {
 
-            image.onload =
-                () => {
+            image.classList.add("show");
 
-                    image.classList.add(
-                        "show"
-                    );
+        };
 
-                };
-
-        },
-        animate ? 180 : 0
-    );
+    }, animate ? 180 : 0);
 
 
     counter.textContent =
@@ -329,7 +240,6 @@ function showImage(
     updateDots();
 
 }
-
 
 
 /* =========================================
@@ -343,48 +253,34 @@ function updateDots() {
             "slideDots"
         );
 
-
     dots.innerHTML = "";
 
 
-    images.forEach(
-        (_, index) => {
+    images.forEach((_, index) => {
 
-            const dot =
-                document.createElement(
-                    "span"
-                );
+        const dot =
+            document.createElement("span");
 
-
-            dot.className =
-                "slide-dot";
+        dot.className =
+            "slide-dot";
 
 
-            if (
-                index ===
-                currentImage
-            ) {
+        if (index === currentImage) {
 
-                dot.classList.add(
-                    "active"
-                );
-
-            }
-
-
-            dots.appendChild(
-                dot
-            );
+            dot.classList.add("active");
 
         }
-    );
+
+
+        dots.appendChild(dot);
+
+    });
 
 }
 
 
-
 /* =========================================
-   ระบบ Swipe
+   Swipe
 ========================================= */
 
 function setupSwipe() {
@@ -397,7 +293,7 @@ function setupSwipe() {
 
     slider.addEventListener(
         "touchstart",
-        (event) => {
+        event => {
 
             touchStartX =
                 event.touches[0].clientX;
@@ -411,11 +307,10 @@ function setupSwipe() {
 
     slider.addEventListener(
         "touchend",
-        (event) => {
+        event => {
 
             touchEndX =
                 event.changedTouches[0].clientX;
-
 
             handleSwipe();
 
@@ -426,12 +321,11 @@ function setupSwipe() {
     );
 
 
-
-    /* รองรับเมาส์ด้วย */
+    /* รองรับเมาส์ */
 
     slider.addEventListener(
         "mousedown",
-        (event) => {
+        event => {
 
             touchStartX =
                 event.clientX;
@@ -442,11 +336,10 @@ function setupSwipe() {
 
     slider.addEventListener(
         "mouseup",
-        (event) => {
+        event => {
 
             touchEndX =
                 event.clientX;
-
 
             handleSwipe();
 
@@ -456,7 +349,6 @@ function setupSwipe() {
 }
 
 
-
 /* =========================================
    ตรวจการปัด
 ========================================= */
@@ -464,12 +356,9 @@ function setupSwipe() {
 function handleSwipe() {
 
     const difference =
-        touchStartX -
-        touchEndX;
+        touchStartX - touchEndX;
 
-
-    const minimumSwipe =
-        45;
+    const minimumSwipe = 45;
 
 
     if (
@@ -482,25 +371,17 @@ function handleSwipe() {
     }
 
 
-    /* ปัดซ้าย */
-
     if (difference > 0) {
 
         nextImage();
 
-    }
-
-
-    /* ปัดขวา */
-
-    else {
+    } else {
 
         previousImage();
 
     }
 
 }
-
 
 
 /* =========================================
@@ -510,7 +391,6 @@ function handleSwipe() {
 function nextImage() {
 
     currentImage++;
-
 
     if (
         currentImage >=
@@ -531,7 +411,6 @@ function nextImage() {
 }
 
 
-
 /* =========================================
    รูปก่อนหน้า
 ========================================= */
@@ -540,10 +419,7 @@ function previousImage() {
 
     currentImage--;
 
-
-    if (
-        currentImage < 0
-    ) {
+    if (currentImage < 0) {
 
         currentImage =
             images.length - 1;
@@ -560,9 +436,8 @@ function previousImage() {
 }
 
 
-
 /* =========================================
-   เปิดหน้าโน้ต
+   เปิดโน้ต
 ========================================= */
 
 function openLetter() {
@@ -575,9 +450,8 @@ function openLetter() {
 }
 
 
-
 /* =========================================
-   เปิดหน้าสุดท้าย
+   เปิดหน้าหัวใจ
 ========================================= */
 
 function openEnding() {
@@ -587,15 +461,13 @@ function openEnding() {
         "endingScreen"
     );
 
-
     createHeartGallery();
 
 }
 
 
-
 /* =========================================
-   สร้างรูปหัวใจ
+   สร้างหัวใจจากรูป
 ========================================= */
 
 function createHeartGallery() {
@@ -605,85 +477,95 @@ function createHeartGallery() {
             "heartGallery"
         );
 
-
     container.innerHTML = "";
 
 
     /*
        ตำแหน่งหัวใจ
-       ใช้รูปซ้ำได้เพื่อให้หัวใจ
-       ดูเต็มและสมมาตรมากขึ้น
+
+       จุดทั้งหมดถูกจัดแบบ
+       ซ้าย = ขวา
+       เพื่อให้หัวใจสมมาตร
     */
 
     const positions = [
 
-        /* ด้านบนซ้าย */
+        /* ===== แถวบน ===== */
 
-        [23, 10],
-        [38, 5],
+        [28, 10],
+        [39, 7],
 
-        /* ด้านบนขวา */
+        [61, 7],
+        [72, 10],
 
-        [62, 5],
-        [77, 10],
 
-        /* ขอบซ้าย */
+        /* ===== แถวที่ 2 ===== */
 
-        [14, 21],
-        [9, 34],
-        [12, 48],
+        [21, 20],
+        [32, 18],
+        [44, 18],
 
-        /* ขอบขวา */
+        [56, 18],
+        [68, 18],
+        [79, 20],
 
-        [86, 21],
-        [91, 34],
-        [88, 48],
 
-        /* ด้านใน */
+        /* ===== แถวที่ 3 ===== */
 
-        [29, 22],
-        [42, 20],
-        [58, 20],
-        [71, 22],
+        [17, 32],
+        [28, 31],
+        [39, 30],
 
-        [24, 35],
-        [38, 34],
-        [52, 34],
-        [66, 34],
-        [76, 35],
+        [50, 30],
 
-        /* กลางล่าง */
+        [61, 30],
+        [72, 31],
+        [83, 32],
 
-        [32, 48],
-        [46, 48],
-        [60, 48],
-        [68, 48],
 
-        /* ปลายหัวใจ */
+        /* ===== แถวที่ 4 ===== */
 
-        [39, 61],
-        [50, 62],
-        [58, 61],
+        [22, 43],
+        [34, 42],
+        [45, 42],
 
-        [50, 75]
+        [55, 42],
+        [66, 42],
+        [78, 43],
+
+
+        /* ===== แถวที่ 5 ===== */
+
+        [29, 54],
+        [40, 53],
+
+        [50, 53],
+
+        [60, 53],
+        [71, 54],
+
+
+        /* ===== แถวล่าง ===== */
+
+        [38, 65],
+        [50, 66],
+        [62, 65],
+
+
+        /* ===== ปลายหัวใจ ===== */
+
+        [50, 78]
 
     ];
 
 
+    /*
+       ใช้รูปทั้ง 10 รูป
+       วนซ้ำอย่างเป็นระเบียบ
+    */
+
     positions.forEach(
         (position, index) => {
-
-
-            /*
-               สุ่มรูปจากทั้ง 10 รูป
-            */
-
-            const randomIndex =
-                Math.floor(
-                    Math.random() *
-                    images.length
-                );
-
 
             const img =
                 document.createElement(
@@ -691,17 +573,25 @@ function createHeartGallery() {
                 );
 
 
+            const imageIndex =
+                index %
+                images.length;
+
+
             img.src =
-                `assets/images/${images[randomIndex]}`;
+                `assets/images/${images[imageIndex]}`;
 
 
             img.alt =
-                "ความทรงจำ";
+                "รูปความทรงจำ";
 
+
+            /*
+               ตำแหน่ง
+            */
 
             img.style.left =
                 `${position[0]}%`;
-
 
             img.style.top =
                 `${position[1]}%`;
@@ -716,16 +606,14 @@ function createHeartGallery() {
 
 
             /*
-               ให้รูปค่อย ๆ ปรากฏ
+               รูปค่อย ๆ ปรากฏ
             */
 
             img.style.animationDelay =
-                `${index * 0.08}s`;
+                `${index * 0.06}s`;
 
 
-            container.appendChild(
-                img
-            );
+            container.appendChild(img);
 
         }
     );
