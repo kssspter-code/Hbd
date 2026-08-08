@@ -1,5 +1,5 @@
 /* =========================================
-   รายชื่อรูปทั้ง 10 รูป
+   รูปภาพทั้ง 10 รูป
 ========================================= */
 
 const images = [
@@ -16,69 +16,6 @@ const images = [
 ];
 
 
-/* =========================================
-   สร้าง Path รูป
-========================================= */
-
-function imagePath(filename) {
-
-    return `./assets/images/${filename}`;
-
-}
-
-
-/* =========================================
-   Element ต่าง ๆ
-========================================= */
-
-const countdownScreen =
-    document.getElementById("countdownScreen");
-
-const countdown =
-    document.getElementById("countdown");
-
-const titleScreen =
-    document.getElementById("titleScreen");
-
-const slideshowScreen =
-    document.getElementById("slideshowScreen");
-
-const letterScreen =
-    document.getElementById("letterScreen");
-
-const endingScreen =
-    document.getElementById("endingScreen");
-
-const startSlideshow =
-    document.getElementById("startSlideshow");
-
-const openLetter =
-    document.getElementById("openLetter");
-
-const showHeart =
-    document.getElementById("showHeart");
-
-const slidePhoto =
-    document.getElementById("slidePhoto");
-
-const slideCounter =
-    document.getElementById("slideCounter");
-
-const slideDots =
-    document.getElementById("slideDots");
-
-const prevPhoto =
-    document.getElementById("prevPhoto");
-
-const nextPhoto =
-    document.getElementById("nextPhoto");
-
-const photoSlider =
-    document.getElementById("photoSlider");
-
-const heartGallery =
-    document.getElementById("heartGallery");
-
 
 /* =========================================
    ตัวแปร
@@ -87,155 +24,331 @@ const heartGallery =
 let currentImage = 0;
 
 let touchStartX = 0;
-
 let touchEndX = 0;
+
+let slideshowOpened = false;
+
 
 
 /* =========================================
-   ฟังก์ชันรอเวลา
+   เริ่ม Countdown
 ========================================= */
 
-function wait(time) {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    return new Promise(
-        resolve => setTimeout(resolve, time)
-    );
+        startCountdown();
 
-}
+        setupButtons();
+
+        setupSwipe();
+
+    }
+);
+
 
 
 /* =========================================
    Countdown
 ========================================= */
 
-async function startCountdown() {
+function startCountdown() {
 
-    const numbers = [
-        "3",
-        "2",
-        "1"
-    ];
+    const countdown =
+        document.getElementById(
+            "countdown"
+        );
 
+    const countdownArea =
+        document.getElementById(
+            "countdownArea"
+        );
 
-    for (const number of numbers) {
-
-        countdown.textContent =
-            number;
-
-
-        countdown.style.animation =
-            "none";
-
-        void countdown.offsetWidth;
-
-        countdown.style.animation =
-            "countdownPop .8s ease";
+    const birthdayContent =
+        document.getElementById(
+            "birthdayContent"
+        );
 
 
-        await wait(1000);
-
-    }
+    let number = 3;
 
 
-    /* ซ่อน Countdown */
+    countdown.textContent =
+        number;
 
-    countdownScreen.classList.add(
-        "hidden"
+
+    const timer =
+        setInterval(
+            () => {
+
+                number--;
+
+
+                if (number > 0) {
+
+                    countdown.textContent =
+                        number;
+
+
+                    /* restart animation */
+
+                    countdown.style.animation =
+                        "none";
+
+                    void countdown.offsetWidth;
+
+                    countdown.style.animation =
+                        "countdownPop .8s ease";
+
+                }
+
+
+                else {
+
+                    clearInterval(timer);
+
+
+                    countdownArea.classList.add(
+                        "hidden"
+                    );
+
+
+                    birthdayContent.classList.remove(
+                        "hidden"
+                    );
+
+                }
+
+            },
+            1000
+        );
+}
+
+
+
+/* =========================================
+   ปุ่มต่าง ๆ
+========================================= */
+
+function setupButtons() {
+
+
+    /* เปิดสมุด */
+
+    const bookButton =
+        document.getElementById(
+            "startSlideshow"
+        );
+
+
+    bookButton.addEventListener(
+        "click",
+        openSlideshow
     );
 
 
-    /* แสดง Happy Birthday */
 
-    titleScreen.classList.remove(
+    /* เปิดจดหมาย */
+
+    const letterButton =
+        document.getElementById(
+            "openLetter"
+        );
+
+
+    letterButton.addEventListener(
+        "click",
+        openLetter
+    );
+
+
+
+    /* เปิดหน้าหัวใจ */
+
+    const heartButton =
+        document.getElementById(
+            "showHeart"
+        );
+
+
+    heartButton.addEventListener(
+        "click",
+        openEnding
+    );
+
+}
+
+
+
+/* =========================================
+   เปลี่ยนหน้า
+========================================= */
+
+function changeScreen(
+    current,
+    next
+) {
+
+    const currentElement =
+        document.getElementById(
+            current
+        );
+
+    const nextElement =
+        document.getElementById(
+            next
+        );
+
+
+    currentElement.classList.add(
+        "hidden"
+    );
+
+    nextElement.classList.remove(
         "hidden"
     );
 
 }
 
 
+
 /* =========================================
-   เปิดหน้าสไลด์
+   เปิด Slideshow
 ========================================= */
 
-startSlideshow.addEventListener(
-    "click",
-    function () {
-
-        titleScreen.classList.add(
-            "hidden"
-        );
+function openSlideshow() {
 
 
-        slideshowScreen.classList.remove(
-            "hidden"
-        );
+    changeScreen(
+        "homeScreen",
+        "slideshowScreen"
+    );
 
 
-        currentImage = 0;
+    currentImage = 0;
 
 
-        showSlide();
+    showImage(
+        currentImage,
+        false
+    );
 
-    }
-);
+}
+
 
 
 /* =========================================
    แสดงรูป
 ========================================= */
 
-function showSlide() {
+function showImage(
+    index,
+    animate = true,
+    direction = "next"
+) {
 
-    /* เริ่ม Fade Out */
+    const image =
+        document.getElementById(
+            "slidePhoto"
+        );
 
-    slidePhoto.classList.remove(
+
+    const counter =
+        document.getElementById(
+            "slideCounter"
+        );
+
+
+    const slider =
+        document.getElementById(
+            "photoSlider"
+        );
+
+
+    image.classList.remove(
         "show"
     );
 
 
+    if (animate) {
+
+        slider.classList.remove(
+            "page-next",
+            "page-prev"
+        );
+
+
+        void slider.offsetWidth;
+
+
+        if (direction === "next") {
+
+            slider.classList.add(
+                "page-next"
+            );
+
+        }
+
+        else {
+
+            slider.classList.add(
+                "page-prev"
+            );
+
+        }
+
+    }
+
+
     setTimeout(
-        function () {
+        () => {
 
-            slidePhoto.src =
-                imagePath(
-                    images[currentImage]
-                );
+            image.src =
+                `assets/images/${images[index]}`;
 
 
-            slideCounter.textContent =
-                `${currentImage + 1} / ${images.length}`;
+            image.onload =
+                () => {
 
-
-            slidePhoto.onload =
-                function () {
-
-                    slidePhoto.classList.add(
+                    image.classList.add(
                         "show"
                     );
 
                 };
 
-
-            createSlideDots();
-
         },
-        180
+        animate ? 180 : 0
     );
+
+
+    counter.textContent =
+        `${index + 1} / ${images.length}`;
+
+
+    updateDots();
 
 }
 
 
+
 /* =========================================
-   จุดด้านล่างรูป
+   จุดบอกจำนวนรูป
 ========================================= */
 
-function createSlideDots() {
+function updateDots() {
 
-    slideDots.innerHTML = "";
+    const dots =
+        document.getElementById(
+            "slideDots"
+        );
+
+
+    dots.innerHTML = "";
 
 
     images.forEach(
-        function (_, index) {
+        (_, index) => {
 
             const dot =
                 document.createElement(
@@ -248,7 +361,8 @@ function createSlideDots() {
 
 
             if (
-                index === currentImage
+                index ===
+                currentImage
             ) {
 
                 dot.classList.add(
@@ -258,20 +372,7 @@ function createSlideDots() {
             }
 
 
-            dot.addEventListener(
-                "click",
-                function () {
-
-                    currentImage =
-                        index;
-
-                    showSlide();
-
-                }
-            );
-
-
-            slideDots.appendChild(
+            dots.appendChild(
                 dot
             );
 
@@ -281,16 +382,139 @@ function createSlideDots() {
 }
 
 
+
+/* =========================================
+   ระบบ Swipe
+========================================= */
+
+function setupSwipe() {
+
+    const slider =
+        document.getElementById(
+            "photoSlider"
+        );
+
+
+    slider.addEventListener(
+        "touchstart",
+        (event) => {
+
+            touchStartX =
+                event.touches[0].clientX;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    slider.addEventListener(
+        "touchend",
+        (event) => {
+
+            touchEndX =
+                event.changedTouches[0].clientX;
+
+
+            handleSwipe();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+
+    /* รองรับเมาส์ด้วย */
+
+    slider.addEventListener(
+        "mousedown",
+        (event) => {
+
+            touchStartX =
+                event.clientX;
+
+        }
+    );
+
+
+    slider.addEventListener(
+        "mouseup",
+        (event) => {
+
+            touchEndX =
+                event.clientX;
+
+
+            handleSwipe();
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   ตรวจการปัด
+========================================= */
+
+function handleSwipe() {
+
+    const difference =
+        touchStartX -
+        touchEndX;
+
+
+    const minimumSwipe =
+        45;
+
+
+    if (
+        Math.abs(difference) <
+        minimumSwipe
+    ) {
+
+        return;
+
+    }
+
+
+    /* ปัดซ้าย */
+
+    if (difference > 0) {
+
+        nextImage();
+
+    }
+
+
+    /* ปัดขวา */
+
+    else {
+
+        previousImage();
+
+    }
+
+}
+
+
+
 /* =========================================
    รูปถัดไป
 ========================================= */
 
-function nextSlide() {
+function nextImage() {
 
     currentImage++;
 
+
     if (
-        currentImage >= images.length
+        currentImage >=
+        images.length
     ) {
 
         currentImage = 0;
@@ -298,18 +522,24 @@ function nextSlide() {
     }
 
 
-    showSlide();
+    showImage(
+        currentImage,
+        true,
+        "next"
+    );
 
 }
+
 
 
 /* =========================================
    รูปก่อนหน้า
 ========================================= */
 
-function previousSlide() {
+function previousImage() {
 
     currentImage--;
+
 
     if (
         currentImage < 0
@@ -321,143 +551,47 @@ function previousSlide() {
     }
 
 
-    showSlide();
+    showImage(
+        currentImage,
+        true,
+        "prev"
+    );
 
 }
 
 
-/* =========================================
-   ปุ่มลูกศร
-========================================= */
-
-nextPhoto.addEventListener(
-    "click",
-    function () {
-
-        nextSlide();
-
-    }
-);
-
-
-prevPhoto.addEventListener(
-    "click",
-    function () {
-
-        previousSlide();
-
-    }
-);
-
 
 /* =========================================
-   ระบบปัดรูปบนมือถือ
+   เปิดหน้าโน้ต
 ========================================= */
 
-photoSlider.addEventListener(
-    "touchstart",
-    function (event) {
+function openLetter() {
 
-        touchStartX =
-            event.changedTouches[0].screenX;
-
-    },
-    {
-        passive: true
-    }
-);
-
-
-photoSlider.addEventListener(
-    "touchend",
-    function (event) {
-
-        touchEndX =
-            event.changedTouches[0].screenX;
-
-
-        handleSwipe();
-
-    },
-    {
-        passive: true
-    }
-);
-
-
-/* =========================================
-   ตรวจสอบการปัด
-========================================= */
-
-function handleSwipe() {
-
-    const distance =
-        touchEndX - touchStartX;
-
-
-    /* ปัดซ้าย */
-
-    if (distance < -50) {
-
-        nextSlide();
-
-    }
-
-
-    /* ปัดขวา */
-
-    if (distance > 50) {
-
-        previousSlide();
-
-    }
+    changeScreen(
+        "slideshowScreen",
+        "letterScreen"
+    );
 
 }
 
 
-/* =========================================
-   เปิดหน้าโน้ตคำอวยพร
-========================================= */
-
-openLetter.addEventListener(
-    "click",
-    function () {
-
-        slideshowScreen.classList.add(
-            "hidden"
-        );
-
-
-        letterScreen.classList.remove(
-            "hidden"
-        );
-
-    }
-);
-
 
 /* =========================================
-   ไปหน้าหัวใจ
+   เปิดหน้าสุดท้าย
 ========================================= */
 
-showHeart.addEventListener(
-    "click",
-    function () {
+function openEnding() {
 
-        letterScreen.classList.add(
-            "hidden"
-        );
-
-
-        endingScreen.classList.remove(
-            "hidden"
-        );
+    changeScreen(
+        "letterScreen",
+        "endingScreen"
+    );
 
 
-        createHeartGallery();
+    createHeartGallery();
 
-    }
-);
+}
+
 
 
 /* =========================================
@@ -466,81 +600,89 @@ showHeart.addEventListener(
 
 function createHeartGallery() {
 
-    heartGallery.innerHTML = "";
+    const container =
+        document.getElementById(
+            "heartGallery"
+        );
+
+
+    container.innerHTML = "";
 
 
     /*
-       ตำแหน่ง 10 รูป
-       ให้เป็นรูปหัวใจ
-
-             ❤️ ❤️
-           ❤️ ❤️ ❤️
-           ❤️ ❤️ ❤️
-             ❤️ ❤️
-               ❤️
+       ตำแหน่งหัวใจ
+       ใช้รูปซ้ำได้เพื่อให้หัวใจ
+       ดูเต็มและสมมาตรมากขึ้น
     */
-
 
     const positions = [
 
-        {
-            x: 108,
-            y: 5
-        },
+        /* ด้านบนซ้าย */
 
-        {
-            x: 210,
-            y: 5
-        },
+        [23, 10],
+        [38, 5],
 
-        {
-            x: 55,
-            y: 75
-        },
+        /* ด้านบนขวา */
 
-        {
-            x: 160,
-            y: 75
-        },
+        [62, 5],
+        [77, 10],
 
-        {
-            x: 265,
-            y: 75
-        },
+        /* ขอบซ้าย */
 
-        {
-            x: 55,
-            y: 160
-        },
+        [14, 21],
+        [9, 34],
+        [12, 48],
 
-        {
-            x: 160,
-            y: 160
-        },
+        /* ขอบขวา */
 
-        {
-            x: 265,
-            y: 160
-        },
+        [86, 21],
+        [91, 34],
+        [88, 48],
 
-        {
-            x: 108,
-            y: 245
-        },
+        /* ด้านใน */
 
-        {
-            x: 210,
-            y: 245
-        }
+        [29, 22],
+        [42, 20],
+        [58, 20],
+        [71, 22],
+
+        [24, 35],
+        [38, 34],
+        [52, 34],
+        [66, 34],
+        [76, 35],
+
+        /* กลางล่าง */
+
+        [32, 48],
+        [46, 48],
+        [60, 48],
+        [68, 48],
+
+        /* ปลายหัวใจ */
+
+        [39, 61],
+        [50, 62],
+        [58, 61],
+
+        [50, 75]
 
     ];
 
 
-    images.forEach(
-        function (
-            filename,
-            index
-        ) {
+    positions.forEach(
+        (position, index) => {
+
+
+            /*
+               สุ่มรูปจากทั้ง 10 รูป
+            */
+
+            const randomIndex =
+                Math.floor(
+                    Math.random() *
+                    images.length
+                );
 
 
             const img =
@@ -550,28 +692,38 @@ function createHeartGallery() {
 
 
             img.src =
-                imagePath(
-                    filename
-                );
+                `assets/images/${images[randomIndex]}`;
 
 
             img.alt =
-                `รูปที่ ${index + 1}`;
+                "ความทรงจำ";
 
 
             img.style.left =
-                `${positions[index].x}px`;
+                `${position[0]}%`;
 
 
             img.style.top =
-                `${positions[index].y}px`;
+                `${position[1]}%`;
 
+
+            /*
+               จัดกึ่งกลาง
+            */
+
+            img.style.transform =
+                "translate(-50%, -50%)";
+
+
+            /*
+               ให้รูปค่อย ๆ ปรากฏ
+            */
 
             img.style.animationDelay =
-                `${index * 0.12}s`;
+                `${index * 0.08}s`;
 
 
-            heartGallery.appendChild(
+            container.appendChild(
                 img
             );
 
@@ -579,40 +731,3 @@ function createHeartGallery() {
     );
 
 }
-
-
-/* =========================================
-   Preload รูปทั้งหมด
-========================================= */
-
-function preloadImages() {
-
-    images.forEach(
-        function (filename) {
-
-            const img =
-                new Image();
-
-            img.src =
-                imagePath(filename);
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   เริ่มเว็บไซต์
-========================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        preloadImages();
-
-        startCountdown();
-
-    }
-);
