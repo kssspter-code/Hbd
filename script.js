@@ -67,7 +67,7 @@ function startSlideshow() {
 
 
             image.src =
-                `assets/images/${currentImage}.jpg`;
+                `assets/images/${currentImage}.jpeg`;
 
 
             number.textContent =
@@ -104,7 +104,7 @@ function createHeartGallery() {
 
 
         img.src =
-            `assets/images/${i}.jpg`;
+            `assets/images/${i}.jpeg`;
 
 
         img.style.animationDelay =
