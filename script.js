@@ -21,31 +21,27 @@ const images = [
 ========================================= */
 
 let currentImage = 0;
-
 let touchStartX = 0;
 let touchEndX = 0;
 
 
 /* =========================================
-   เริ่มต้น
+   เริ่มต้นเว็บไซต์
 ========================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-        startCountdown();
+    startCountdown();
 
-        setupButtons();
+    setupButtons();
 
-        setupSwipe();
+    setupSwipe();
 
-    }
-);
+});
 
 
 /* =========================================
-   Countdown 3 2 1
+   COUNTDOWN 3 → 2 → 1
 ========================================= */
 
 function startCountdown() {
@@ -90,37 +86,54 @@ function startCountdown() {
         }
 
     }, 1000);
+
 }
 
 
 /* =========================================
-   ปุ่ม
+   ปุ่มทั้งหมด
 ========================================= */
 
 function setupButtons() {
 
-    document
-        .getElementById("startSlideshow")
-        .addEventListener(
+    const startButton =
+        document.getElementById("startSlideshow");
+
+    const letterButton =
+        document.getElementById("openLetter");
+
+    const heartButton =
+        document.getElementById("showHeart");
+
+
+    if (startButton) {
+
+        startButton.addEventListener(
             "click",
             openSlideshow
         );
 
+    }
 
-    document
-        .getElementById("openLetter")
-        .addEventListener(
+
+    if (letterButton) {
+
+        letterButton.addEventListener(
             "click",
             openLetter
         );
 
+    }
 
-    document
-        .getElementById("showHeart")
-        .addEventListener(
+
+    if (heartButton) {
+
+        heartButton.addEventListener(
             "click",
             openEnding
         );
+
+    }
 
 }
 
@@ -131,19 +144,31 @@ function setupButtons() {
 
 function changeScreen(current, next) {
 
-    document
-        .getElementById(current)
-        .classList.add("hidden");
+    const currentScreen =
+        document.getElementById(current);
 
-    document
-        .getElementById(next)
-        .classList.remove("hidden");
+    const nextScreen =
+        document.getElementById(next);
+
+
+    if (currentScreen) {
+
+        currentScreen.classList.add("hidden");
+
+    }
+
+
+    if (nextScreen) {
+
+        nextScreen.classList.remove("hidden");
+
+    }
 
 }
 
 
 /* =========================================
-   เปิด Slideshow
+   เปิดสมุดรูป
 ========================================= */
 
 function openSlideshow() {
@@ -153,7 +178,9 @@ function openSlideshow() {
         "slideshowScreen"
     );
 
+
     currentImage = 0;
+
 
     showImage(
         currentImage,
@@ -174,19 +201,20 @@ function showImage(
 ) {
 
     const image =
-        document.getElementById(
-            "slidePhoto"
-        );
+        document.getElementById("slidePhoto");
 
     const counter =
-        document.getElementById(
-            "slideCounter"
-        );
+        document.getElementById("slideCounter");
 
     const slider =
-        document.getElementById(
-            "photoSlider"
-        );
+        document.getElementById("photoSlider");
+
+
+    if (!image || !counter || !slider) {
+
+        return;
+
+    }
 
 
     image.classList.remove("show");
@@ -199,20 +227,17 @@ function showImage(
             "page-prev"
         );
 
+
         void slider.offsetWidth;
 
 
         if (direction === "next") {
 
-            slider.classList.add(
-                "page-next"
-            );
+            slider.classList.add("page-next");
 
         } else {
 
-            slider.classList.add(
-                "page-prev"
-            );
+            slider.classList.add("page-prev");
 
         }
 
@@ -223,6 +248,7 @@ function showImage(
 
         image.src =
             `assets/images/${images[index]}`;
+
 
         image.onload = () => {
 
@@ -243,15 +269,21 @@ function showImage(
 
 
 /* =========================================
-   จุดบอกจำนวนรูป
+   จุดแสดงรูปปัจจุบัน
 ========================================= */
 
 function updateDots() {
 
     const dots =
-        document.getElementById(
-            "slideDots"
-        );
+        document.getElementById("slideDots");
+
+
+    if (!dots) {
+
+        return;
+
+    }
+
 
     dots.innerHTML = "";
 
@@ -260,6 +292,7 @@ function updateDots() {
 
         const dot =
             document.createElement("span");
+
 
         dot.className =
             "slide-dot";
@@ -280,15 +313,20 @@ function updateDots() {
 
 
 /* =========================================
-   Swipe
+   ระบบปัดรูป
 ========================================= */
 
 function setupSwipe() {
 
     const slider =
-        document.getElementById(
-            "photoSlider"
-        );
+        document.getElementById("photoSlider");
+
+
+    if (!slider) {
+
+        return;
+
+    }
 
 
     slider.addEventListener(
@@ -321,7 +359,7 @@ function setupSwipe() {
     );
 
 
-    /* รองรับเมาส์ */
+    /* รองรับคอมพิวเตอร์ */
 
     slider.addEventListener(
         "mousedown",
@@ -392,6 +430,7 @@ function nextImage() {
 
     currentImage++;
 
+
     if (
         currentImage >=
         images.length
@@ -419,6 +458,7 @@ function previousImage() {
 
     currentImage--;
 
+
     if (currentImage < 0) {
 
         currentImage =
@@ -437,7 +477,7 @@ function previousImage() {
 
 
 /* =========================================
-   เปิดโน้ต
+   เปิดหน้าโน้ต
 ========================================= */
 
 function openLetter() {
@@ -461,36 +501,42 @@ function openEnding() {
         "endingScreen"
     );
 
+
     createHeartGallery();
 
 }
 
 
 /* =========================================
-   สร้างหัวใจจากรูป
+   สร้างหัวใจแบบสมมาตร
 ========================================= */
 
 function createHeartGallery() {
 
     const container =
-        document.getElementById(
-            "heartGallery"
-        );
+        document.getElementById("heartGallery");
+
+
+    if (!container) {
+
+        return;
+
+    }
+
 
     container.innerHTML = "";
 
 
     /*
-       ตำแหน่งหัวใจ
+       ตำแหน่งรูปทั้งหมด
 
-       จุดทั้งหมดถูกจัดแบบ
-       ซ้าย = ขวา
+       ซ้ายและขวาออกแบบให้เป็นคู่
        เพื่อให้หัวใจสมมาตร
     */
 
     const positions = [
 
-        /* ===== แถวบน ===== */
+        /* ===== ส่วนโค้งด้านบน ===== */
 
         [28, 10],
         [39, 7],
@@ -502,54 +548,56 @@ function createHeartGallery() {
         /* ===== แถวที่ 2 ===== */
 
         [21, 20],
-        [32, 18],
+        [33, 18],
         [44, 18],
 
         [56, 18],
-        [68, 18],
+        [67, 18],
         [79, 20],
 
 
         /* ===== แถวที่ 3 ===== */
 
-        [17, 32],
-        [28, 31],
-        [39, 30],
+        [17, 31],
+        [28, 30],
+        [39, 29],
 
-        [50, 30],
+        [50, 29],
 
-        [61, 30],
-        [72, 31],
-        [83, 32],
+        [61, 29],
+        [72, 30],
+        [83, 31],
 
 
         /* ===== แถวที่ 4 ===== */
 
-        [22, 43],
-        [34, 42],
-        [45, 42],
+        [21, 42],
+        [33, 41],
+        [44, 41],
 
-        [55, 42],
-        [66, 42],
-        [78, 43],
+        [56, 41],
+        [67, 41],
+        [79, 42],
 
 
         /* ===== แถวที่ 5 ===== */
 
-        [29, 54],
-        [40, 53],
+        [29, 53],
+        [40, 52],
 
-        [50, 53],
+        [50, 52],
 
-        [60, 53],
-        [71, 54],
+        [60, 52],
+        [71, 53],
 
 
-        /* ===== แถวล่าง ===== */
+        /* ===== แถวที่ 6 ===== */
 
-        [38, 65],
-        [50, 66],
-        [62, 65],
+        [38, 64],
+
+        [50, 65],
+
+        [62, 64],
 
 
         /* ===== ปลายหัวใจ ===== */
@@ -560,22 +608,23 @@ function createHeartGallery() {
 
 
     /*
-       ใช้รูปทั้ง 10 รูป
-       วนซ้ำอย่างเป็นระเบียบ
+       สร้างรูปทีละรูป
     */
 
     positions.forEach(
         (position, index) => {
 
             const img =
-                document.createElement(
-                    "img"
-                );
+                document.createElement("img");
 
+
+            /*
+               ใช้รูปทั้ง 10 รูป
+               แล้ววนซ้ำอย่างเป็นระเบียบ
+            */
 
             const imageIndex =
-                index %
-                images.length;
+                index % images.length;
 
 
             img.src =
@@ -587,7 +636,7 @@ function createHeartGallery() {
 
 
             /*
-               ตำแหน่ง
+               ตำแหน่ง X / Y
             */
 
             img.style.left =
@@ -598,15 +647,7 @@ function createHeartGallery() {
 
 
             /*
-               จัดกึ่งกลาง
-            */
-
-            img.style.transform =
-                "translate(-50%, -50%)";
-
-
-            /*
-               รูปค่อย ๆ ปรากฏ
+               ทำให้รูปค่อย ๆ ปรากฏ
             */
 
             img.style.animationDelay =
