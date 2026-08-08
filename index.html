@@ -1,22 +1,78 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Happy Birthday Moji ❤️</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="./style.css">
+    <title>
+        Happy Birthday Moji ❤️
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- พื้นหลังหัวใจ -->
+
+    <!-- =================================
+         พื้นหลัง
+    ================================== -->
+
     <div class="bg-hearts"></div>
 
 
     <!-- =================================
-         หน้าแรก : Countdown
+         ตัวละครประจำเว็บไซต์
+    ================================== -->
+
+    <div
+        class="melody-character melody-top"
+        aria-hidden="true"
+    >
+
+        <div class="melody-ears">
+
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <div class="melody-face">
+
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+
+            <div class="nose"></div>
+
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+
+        </div>
+
+        <div class="melody-body">
+
+            <div class="arm left"></div>
+            <div class="arm right"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         หน้า Countdown
     ================================== -->
 
     <section
@@ -24,9 +80,22 @@
         class="screen countdown-screen"
     >
 
-        <div class="bunny">
-            🐰
+        <div class="mini-melody">
+
+            <div class="mini-ear left"></div>
+            <div class="mini-ear right"></div>
+
+            <div class="mini-face">
+
+                <span class="mini-eye left"></span>
+                <span class="mini-eye right"></span>
+
+                <span class="mini-nose"></span>
+
+            </div>
+
         </div>
+
 
         <div
             id="countdown"
@@ -35,8 +104,11 @@
             3
         </div>
 
+
         <p class="tiny">
+
             a little birthday surprise...
+
         </p>
 
     </section>
@@ -51,6 +123,28 @@
         id="titleScreen"
         class="screen title-screen hidden"
     >
+
+
+        <div class="corner-character">
+
+            <div class="mini-melody">
+
+                <div class="mini-ear left"></div>
+                <div class="mini-ear right"></div>
+
+                <div class="mini-face">
+
+                    <span class="mini-eye left"></span>
+                    <span class="mini-eye right"></span>
+
+                    <span class="mini-nose"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
         <div class="sparkles">
             ✦ ˚｡⋆
@@ -83,10 +177,12 @@
 
 
         <button
-            id="openBook"
+            id="startSlideshow"
             class="cute-btn"
         >
-            เปิดสมุดของขวัญ 🎀
+
+            เปิดรูปของเรา 🎀
+
         </button>
 
     </section>
@@ -94,42 +190,30 @@
 
 
     <!-- =================================
-         หน้าสมุดภาพ
+         หน้าสไลด์รูป
     ================================== -->
 
     <section
-        id="bookScreen"
-        class="screen book-screen hidden"
+        id="slideshowScreen"
+        class="screen slideshow-screen hidden"
     >
 
 
-        <!-- โน้ตคำอวยพรด้านบน -->
+        <div class="page-character">
 
-        <div class="note">
+            <div class="mini-melody">
 
-            <div class="note-pin">
-                ♡
-            </div>
+                <div class="mini-ear left"></div>
+                <div class="mini-ear right"></div>
 
+                <div class="mini-face">
 
-            <div class="note-track">
+                    <span class="mini-eye left"></span>
+                    <span class="mini-eye right"></span>
 
-                <span>
+                    <span class="mini-nose"></span>
 
-                    สุขสันต์วันเกิดนะคับบ ♡
-                    ขอให้ปีต่อจากวันนี้และทุกๆวัน
-                    เป็นวันที่ดีของเธอนะ
-                    เค้าอยากให้เธอรักตัวเองมากๆ
-                    พักผ่อนเยอะๆ
-                    กินของอร่อยบ่อยๆ
-                    แล้วก็มีความสุขในทุกๆวัน
-                    เหมือนที่เธอทำให้เค้ามีความสุขนะ
-                    เค้ามีความสุขมากที่มีเธอเข้ามาในชีวิต
-                    ขอบคุณที่ทำให้ทุกๆวันของเค้าเป็นวันที่ดีขึ้นนะ
-                    อยากให้แฟนอยู่กับเค้าแบบนี้ไปนานๆนะคับ
-                    เค้ารักเธอที่สุดเลย ❤️
-
-                </span>
+                </div>
 
             </div>
 
@@ -137,87 +221,235 @@
 
 
 
-        <!-- สมุด -->
+        <div class="slide-title">
 
-        <div class="book">
+            <span>
+                ♡ Moji ♡
+            </span>
 
-
-            <div class="book-ribbon">
-
-                MOJI ♡
-
-            </div>
+        </div>
 
 
 
-            <div class="book-page">
+        <!-- สไลด์ -->
 
+        <div
+            id="photoSlider"
+            class="photo-slider"
+        >
 
-                <!-- หัวกระดาษ -->
+            <div class="photo-inner">
 
-                <div class="page-header">
-
-                    <span>
-                        ♡ our memories ♡
-                    </span>
-
-                    <span id="pageCounter">
-                        1 / 10
-                    </span>
-
-                </div>
-
-
-
-                <!-- รูป -->
-
-                <div class="photo-frame">
-
-                    <img
-                        id="bookPhoto"
-                        src="./assets/images/IMG_2277.jpeg"
-                        alt="memory"
-                    >
-
-                </div>
-
-
-
-                <!-- จุดบอกหน้าปัจจุบัน -->
-
-                <div
-                    class="dots"
-                    id="dots"
-                ></div>
-
-
-
-                <!-- ปุ่มเปลี่ยนรูป -->
-
-                <button
-                    id="nextPhoto"
-                    class="cute-btn small"
+                <img
+                    id="slidePhoto"
+                    src="./assets/images/IMG_2277.jpeg"
+                    alt="รูปของเรา"
                 >
-                    หน้าถัดไป ♡
-                </button>
-
 
             </div>
 
+
+            <button
+                id="prevPhoto"
+                class="slide-arrow left"
+                aria-label="รูปก่อนหน้า"
+            >
+                ‹
+            </button>
+
+
+            <button
+                id="nextPhoto"
+                class="slide-arrow right"
+                aria-label="รูปถัดไป"
+            >
+                ›
+            </button>
+
+
         </div>
+
+
+
+        <div
+            id="slideCounter"
+            class="slide-counter"
+        >
+            1 / 10
+        </div>
+
+
+        <div
+            id="slideDots"
+            class="slide-dots"
+        ></div>
+
+
+        <p class="swipe-text">
+
+            ‹ ปัดซ้าย / ขวา เพื่อดูรูป ›
+
+        </p>
+
+
+        <button
+            id="openLetter"
+            class="cute-btn small"
+        >
+
+            อ่านคำอวยพร 💌
+
+        </button>
 
     </section>
 
 
 
     <!-- =================================
-         หน้าสุดท้าย : รูปหัวใจ
+         หน้าโน้ตคำอวยพร
+    ================================== -->
+
+    <section
+        id="letterScreen"
+        class="screen letter-screen hidden"
+    >
+
+
+        <div class="letter-character">
+
+            <div class="mini-melody">
+
+                <div class="mini-ear left"></div>
+                <div class="mini-ear right"></div>
+
+                <div class="mini-face">
+
+                    <span class="mini-eye left"></span>
+                    <span class="mini-eye right"></span>
+
+                    <span class="mini-nose"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="letter-card">
+
+
+            <div class="letter-decoration">
+
+                ♡ 🎀 ♡
+
+            </div>
+
+
+            <h1>
+
+                ถึง Moji ❤️
+
+            </h1>
+
+
+            <div class="letter-paper">
+
+
+                <p>
+
+                    สุขสันต์วันเกิดนะคับบ
+                    ขอให้ปีต่อจากวันนี้และทุกๆวัน
+                    เป็นวันที่ดีของเธอนะ
+
+                    <br><br>
+
+                    เค้าอยากให้เธอรักตัวเองมากๆ
+                    พักผ่อนเยอะๆ
+                    กินของอร่อยบ่อยๆ
+                    แล้วก็มีความสุขในทุกๆวัน
+
+                    <br><br>
+
+                    เหมือนที่เธอทำให้เค้ามีความสุขนะ
+                    เค้ามีความสุขมาก
+                    ที่มีเธอเข้ามาในชีวิต
+
+                    <br><br>
+
+                    ขอบคุณที่ทำให้ทุกๆวัน
+                    ของเค้าเป็นวันที่ดีขึ้นนะ
+
+                    <br><br>
+
+                    อยากให้แฟนอยู่กับเค้า
+                    แบบนี้ไปนานๆนะคับ
+
+                    <br><br>
+
+                    เค้ารักเธอที่สุดเลย ❤️ &lt;3
+
+                </p>
+
+
+            </div>
+
+
+            <div class="letter-sticker">
+
+                🌸 ♡ 🌸
+
+            </div>
+
+
+        </div>
+
+
+
+        <button
+            id="showHeart"
+            class="cute-btn"
+        >
+
+            ไปหน้าสุดท้าย ❤️
+
+        </button>
+
+    </section>
+
+
+
+    <!-- =================================
+         หน้าสุดท้าย
     ================================== -->
 
     <section
         id="endingScreen"
         class="screen ending-screen hidden"
     >
+
+
+        <div class="ending-character">
+
+            <div class="mini-melody">
+
+                <div class="mini-ear left"></div>
+                <div class="mini-ear right"></div>
+
+                <div class="mini-face">
+
+                    <span class="mini-eye left"></span>
+                    <span class="mini-eye right"></span>
+
+                    <span class="mini-nose"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
 
         <div class="ending-title">
@@ -227,29 +459,17 @@
         </div>
 
 
-        <p>
-
-            ความทรงจำทั้งหมดของเรา
-
-        </p>
-
-
-
-        <!--
-            JavaScript จะนำรูปทั้ง 10 รูป
-            มาเรียงเป็นรูปหัวใจตรงนี้
-        -->
-
         <div
             id="heartGallery"
             class="heart-gallery"
         ></div>
 
 
-
         <div class="ending-message">
 
-            ขอบคุณที่เข้ามาเป็นความสุขของเค้านะ
+            ขอบคุณที่เข้ามาเป็น
+            ความสุขของเค้านะ
+
             <br>
 
             เค้ารักเธอที่สุดเลย ❤️
@@ -261,9 +481,15 @@
 
 
 
-    <!-- JavaScript -->
+    <!-- =================================
+         JavaScript
+    ================================== -->
 
-    <script src="./script.js"></script>
+    <script
+        src="./script.js"
+    ></script>
+
 
 </body>
+
 </html>
