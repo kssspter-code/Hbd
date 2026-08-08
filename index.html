@@ -3,61 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Moji ❤️ ที่รักของเค้า ><</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
+    <div class="hearts"></div>
 
-<h1>🎂 Happy Birthday 🎂</h1>
+    <main class="container">
 
-<h2>Moji ❤️ ที่รักของเค้า ><</h2>
+        <!-- หน้าเปิด -->
+        <section class="welcome" id="welcome">
 
-<img src="assets/images/1.jpg" class="photo">
+            <div class="cake">🎂</div>
 
-<p class="message">
+            <h1>Happy Birthday</h1>
 
-สุขสันต์วันเกิดนะคับบ ขอให้ปีต่อจากวันนี้และทุกๆวันเป็นวันที่ดีของเธอนะ
+            <h2>Moji ❤️</h2>
 
-เค้าอยากให้เธอรักตัวเองมากๆ
+            <p>ที่รักของเค้า &gt;&lt;</p>
 
-พักผ่อนเยอะๆ
+            <button onclick="startSurprise()">
+                เปิดของขวัญ 💝
+            </button>
 
-กินของอร่อยบ่อยๆ
+        </section>
 
-แล้วก็มีความสุขในทุกๆวันเหมือนที่เธอทำให้เค้ามีความสุขนะ
 
-เค้ามีความสุขมากที่มีเธอเข้ามาในชีวิต
+        <!-- ส่วนเซอร์ไพรส์ -->
+        <section class="surprise" id="surprise">
 
-ขอบคุณที่ทำให้ทุกๆวันของเค้าเป็นวันที่ดีขึ้นนะ
+            <h1>สุขสันต์วันเกิดนะคับ 🎂</h1>
 
-อยากให้แฟนอยู่กับเค้าแบบนี้ไปนานๆนะคับ
+            <!-- Slideshow -->
+            <div class="slideshow">
 
-เค้ารักเธอที่สุดเลย ❤️
+                <img id="slideImage" src="assets/images/1.jpg">
 
-</p>
+                <div class="slideNumber">
+                    <span id="currentSlide">1</span> / 10
+                </div>
 
-<div class="gallery">
+            </div>
 
-<img src="assets/images/1.jpg">
 
-<img src="assets/images/2.jpg">
+            <!-- ข้อความ -->
+            <div class="letter">
 
-<img src="assets/images/3.jpg">
+                <h2>ถึง Moji ❤️</h2>
 
-</div>
+                <p>
+                    สุขสันต์วันเกิดนะคับบ ขอให้ปีต่อจากวันนี้และทุกๆวันเป็นวันที่ดีของเธอนะ
+                    <br><br>
 
-<button id="loveBtn">
+                    เค้าอยากให้เธอรักตัวเองมากๆ พักผ่อนเยอะๆ
+                    กินของอร่อยบ่อยๆ แล้วก็มีความสุขในทุกๆวัน
+                    เหมือนที่เธอทำให้เค้ามีความสุขนะ
+                    <br><br>
 
-กดตรงนี้สิ 💖
+                    เค้ามีความสุขมากที่มีเธอเข้ามาในชีวิต
+                    ขอบคุณที่ทำให้ทุกๆวันของเค้าเป็นวันที่ดีขึ้นนะ
+                    <br><br>
 
-</button>
+                    อยากให้แฟนอยู่กับเค้าแบบนี้ไปนานๆนะคับ
+                    <br><br>
 
-</div>
+                    เค้ารักเธอที่สุดเลย ❤️ &lt;3
+                </p>
 
-<script src="script.js"></script>
+            </div>
+
+
+            <!-- รูปทั้งหมด -->
+            <section class="memories">
+
+                <h2>ความทรงจำของเรา ❤️</h2>
+
+                <div class="gallery">
+
+                    <img src="assets/images/1.jpg">
+                    <img src="assets/images/2.jpg">
+                    <img src="assets/images/3.jpg">
+                    <img src="assets/images/4.jpg">
+                    <img src="assets/images/5.jpg">
+                    <img src="assets/images/6.jpg">
+                    <img src="assets/images/7.jpg">
+                    <img src="assets/images/8.jpg">
+                    <img src="assets/images/9.jpg">
+                    <img src="assets/images/10.jpg">
+
+                </div>
+
+            </section>
+
+
+            <!-- ตอนจบ -->
+            <section class="ending">
+
+                <h1>❤️</h1>
+
+                <h2>Moji</h2>
+
+                <p>
+                    ขอบคุณที่เข้ามาเป็นความสุขของเค้านะ
+                </p>
+
+                <div class="heartGallery" id="heartGallery">
+
+                    <!-- JavaScript จะนำรูปมาจัดเป็นรูปหัวใจ -->
+
+                </div>
+
+                <h2 class="finalText">
+                    รักเธอที่สุดเลย ❤️
+                </h2>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
 
 </body>
 </html>
