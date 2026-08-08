@@ -2,521 +2,898 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+:root {
+    --pink: #ff8fc8;
+    --pink-light: #fff1f8;
+    --pink-soft: #ffd9ea;
+    --pink-dark: #c85a98;
+    --text: #6f3560;
+    --white: #ffffff;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-
     font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
 
-    color: white;
+    color: var(--text);
 
     background:
         radial-gradient(
-            circle at top,
-            #52205f 0%,
-            #24102d 40%,
-            #08060d 100%
+            circle at 50% 0%,
+            #ffffff 0%,
+            #fff0f7 38%,
+            #ffd5e8 100%
         );
 
     overflow-x: hidden;
 }
 
 
-/* =========================
-   Container
-========================= */
+/* =================================
+   พื้นหลังหัวใจ
+================================= */
 
-.container {
-    width: 100%;
-    max-width: 700px;
-    margin: auto;
-    padding: 20px;
-}
+.bg-hearts::before,
+.bg-hearts::after {
+    content: "♡ ୨୧ ♡ ୨୧ ♡ ୨୧ ♡";
 
-
-/* =========================
-   หน้าแรก
-========================= */
-
-.welcome {
-    min-height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    padding: 30px;
-}
-
-.cake {
-    font-size: 80px;
-
-    animation:
-        cakeFloat 2s ease-in-out infinite;
-}
-
-.welcome h1 {
-    margin: 15px 0 5px;
-
-    font-size: clamp(40px, 10vw, 70px);
-
-    text-shadow:
-        0 0 20px rgba(255, 130, 220, 0.8);
-}
-
-.welcome h2 {
-    margin: 5px;
-
-    font-size: 35px;
-
-    color: #ff9edc;
-}
-
-.welcome p {
-    font-size: 22px;
-}
-
-.welcome button {
-    margin-top: 25px;
-
-    padding: 16px 30px;
-
-    border: none;
-    border-radius: 40px;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff5db1,
-            #9c4dff
-        );
-
-    box-shadow:
-        0 0 25px rgba(255, 80, 190, 0.5);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.25s,
-        box-shadow 0.25s;
-}
-
-.welcome button:active {
-    transform: scale(0.95);
-}
-
-
-/* =========================
-   Surprise
-========================= */
-
-.surprise {
-    display: none;
-
-    text-align: center;
-
-    animation: appear 1s ease;
-}
-
-.surprise > h1 {
-    margin-top: 20px;
-
-    font-size: clamp(30px, 8vw, 50px);
-
-    text-shadow:
-        0 0 20px rgba(255, 130, 220, 0.8);
-}
-
-
-/* =========================
-   Slideshow
-========================= */
-
-.slideshow {
-    position: relative;
-
-    width: 100%;
-
-    margin: 30px auto;
-
-    border-radius: 35px;
-
-    overflow: hidden;
-
-    background: #24132c;
-
-    border: 1px solid rgba(255, 180, 240, 0.35);
-
-    box-shadow:
-        0 0 35px rgba(255, 50, 190, 0.25);
-}
-
-.slideshow img {
-    display: block;
-
-    width: 100%;
-
-    height: min(75vh, 650px);
-
-    object-fit: contain;
-
-    background: #1d1025;
-
-    opacity: 1;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
-}
-
-.slideshow img.fade {
-    opacity: 0;
-
-    transform: scale(0.96);
-}
-
-.slideNumber {
-    position: absolute;
-
-    right: 15px;
-    bottom: 15px;
-
-    padding: 10px 18px;
-
-    border-radius: 30px;
-
-    background: rgba(0, 0, 0, 0.65);
-
-    font-size: 16px;
-}
-
-
-/* =========================
-   Letter
-========================= */
-
-.letter {
-    margin-top: 40px;
-
-    padding: 30px 25px;
-
-    border-radius: 30px;
-
-    background:
-        rgba(90, 40, 105, 0.35);
-
-    border:
-        1px solid rgba(255, 170, 235, 0.25);
-
-    box-shadow:
-        0 0 30px rgba(255, 70, 190, 0.15);
-}
-
-.letter h2 {
-    color: #ff9edc;
-
-    font-size: 30px;
-
-    margin-top: 0;
-}
-
-.letter p {
-    font-size: 18px;
-
-    line-height: 2;
-
-    margin: 0;
-}
-
-
-/* =========================
-   Memories
-========================= */
-
-.memories {
-    margin-top: 60px;
-}
-
-.memories h2 {
-    color: #ff9edc;
-
-    font-size: 30px;
-}
-
-.gallery {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 12px;
-
-    margin-top: 25px;
-}
-
-.gallery img {
-    width: 100%;
-
-    aspect-ratio: 1 / 1;
-
-    object-fit: cover;
-
-    border-radius: 18px;
-
-    border:
-        1px solid rgba(255, 170, 235, 0.35);
-
-    opacity: 0;
-
-    animation:
-        imageAppear 0.8s ease forwards;
-
-    box-shadow:
-        0 0 15px rgba(255, 70, 190, 0.2);
-}
-
-
-/* =========================
-   Ending
-========================= */
-
-.ending {
-    min-height: 100vh;
-
-    padding:
-        100px
-        10px
-        100px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    text-align: center;
-}
-
-.bigHeart {
-    font-size: 100px;
-
-    animation:
-        heartbeat 1.5s ease-in-out infinite;
-
-    filter:
-        drop-shadow(
-            0 0 25px
-            rgba(255, 50, 120, 0.8)
-        );
-}
-
-.ending h2 {
-    font-size: 35px;
-
-    color: #ff9edc;
-}
-
-.ending p {
-    font-size: 18px;
-}
-
-
-/* =========================
-   รูปหัวใจ
-========================= */
-
-.heartGallery {
-    position: relative;
-
-    width: 360px;
-    height: 360px;
-
-    margin:
-        40px auto
-        20px;
-}
-
-.heartGallery img {
-    position: absolute;
-
-    width: 105px;
-    height: 105px;
-
-    object-fit: cover;
-
-    border-radius: 20px;
-
-    border:
-        2px solid rgba(255, 170, 235, 0.65);
-
-    box-shadow:
-        0 0 20px rgba(255, 60, 190, 0.55);
-
-    opacity: 0;
-
-    animation:
-        heartAppear 0.8s ease forwards;
-}
-
-
-/*
-   ตำแหน่งรูป 10 รูป
-   ให้เป็นรูปหัวใจ
-*/
-
-.heartGallery img:nth-child(1) {
-    left: 75px;
-    top: 0;
-}
-
-.heartGallery img:nth-child(2) {
-    left: 180px;
-    top: 0;
-}
-
-.heartGallery img:nth-child(3) {
-    left: 25px;
-    top: 90px;
-}
-
-.heartGallery img:nth-child(4) {
-    left: 130px;
-    top: 90px;
-}
-
-.heartGallery img:nth-child(5) {
-    left: 235px;
-    top: 90px;
-}
-
-.heartGallery img:nth-child(6) {
-    left: 75px;
-    top: 180px;
-}
-
-.heartGallery img:nth-child(7) {
-    left: 180px;
-    top: 180px;
-}
-
-.heartGallery img:nth-child(8) {
-    left: 130px;
-    top: 270px;
-}
-
-.heartGallery img:nth-child(9) {
-    left: 25px;
-    top: 180px;
-}
-
-.heartGallery img:nth-child(10) {
-    left: 235px;
-    top: 180px;
-}
-
-
-.finalText {
-    margin-top: 60px;
-
-    color: #ff8fd8 !important;
-
-    text-shadow:
-        0 0 20px rgba(255, 90, 200, 0.7);
-}
-
-
-/* =========================
-   หัวใจลอย
-========================= */
-
-.hearts {
     position: fixed;
 
     inset: 0;
 
+    z-index: -1;
+
     pointer-events: none;
+
+    color: rgba(255, 120, 185, 0.15);
+
+    font-size: 32px;
+
+    line-height: 2.8;
+
+    letter-spacing: 25px;
+
+    transform: rotate(-8deg);
+}
+
+
+/* =================================
+   หน้าหลัก
+================================= */
+
+.screen {
+    width: 100%;
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+
+    overflow: hidden;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =================================
+   Countdown
+================================= */
+
+.countdown-screen {
+    text-align: center;
+}
+
+.bunny {
+    font-size: 82px;
+
+    margin-bottom: 10px;
+
+    animation:
+        bunnyFloat 1.8s ease-in-out infinite;
+}
+
+.countdown {
+    font-size:
+        clamp(
+            90px,
+            28vw,
+            180px
+        );
+
+    font-weight: 900;
+
+    color: var(--pink);
+
+    line-height: 1;
+
+    text-shadow:
+        0 7px 0 #ffffff;
+
+    animation:
+        countdownPop 0.8s ease;
+}
+
+.tiny {
+    margin-top: 25px;
+
+    color: #b76a94;
+
+    letter-spacing: 2px;
+
+    font-size: 13px;
+}
+
+
+/* =================================
+   Happy Birthday
+================================= */
+
+.title-screen {
+    text-align: center;
+}
+
+.sparkles {
+    font-size: 34px;
+
+    color: var(--pink);
+
+    margin-bottom: 12px;
+
+    animation:
+        sparkle 2s ease-in-out infinite;
+}
+
+.title-line {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(
+            50px,
+            14vw,
+            95px
+        );
+
+    font-weight: 900;
+
+    line-height: 0.92;
+
+    color: #ef77b3;
+
+    text-shadow:
+        4px 5px 0 #ffffff;
+
+    animation:
+        titleAppear 0.8s ease both;
+}
+
+.title-line:nth-of-type(3) {
+    color: #e36daa;
+}
+
+.title-line.name {
+    color: #c95a98;
+}
+
+.title-heart {
+    font-size: 68px;
+
+    margin:
+        18px 0 25px;
+
+    animation:
+        heartBeat 1.4s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 8px 15px
+            rgba(255, 90, 160, 0.25)
+        );
+}
+
+
+/* =================================
+   ปุ่ม
+================================= */
+
+.cute-btn {
+    border: 2px solid #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffacd4,
+            #ed78b4
+        );
+
+    color: #ffffff;
+
+    padding:
+        14px
+        28px;
+
+    border-radius: 999px;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 28px
+        rgba(214, 86, 148, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.cute-btn:hover {
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 14px 32px
+        rgba(214, 86, 148, 0.35);
+}
+
+.cute-btn:active {
+    transform:
+        scale(0.95);
+}
+
+.cute-btn.small {
+    padding:
+        10px
+        20px;
+
+    font-size: 14px;
+}
+
+
+/* =================================
+   หน้าสมุด
+================================= */
+
+.book-screen {
+    justify-content:
+        flex-start;
+
+    padding-top: 30px;
+
+    padding-bottom: 50px;
+}
+
+
+/* =================================
+   โน้ตข้อความ
+================================= */
+
+.note {
+    width:
+        min(
+            92vw,
+            680px
+        );
+
+    height: 62px;
+
+    position: relative;
+
+    margin-bottom: 22px;
 
     overflow: hidden;
 
-    z-index: 0;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.95
+        );
+
+    border:
+        2px solid
+        #ffc0dd;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(
+            166,
+            66,
+            125,
+            0.15
+        );
 }
 
-.container {
+.note-pin {
+    position: absolute;
+
+    left: 14px;
+
+    top: 16px;
+
+    z-index: 3;
+
+    width: 30px;
+
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #ef77b3;
+
+    background:
+        #fff0f7;
+
+    box-shadow:
+        0 3px 8px
+        rgba(200, 80, 140, 0.15);
+}
+
+.note-track {
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    padding-left: 58px;
+}
+
+.note-track span {
+    display: inline-block;
+
+    padding-right: 100px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #a95680;
+
+    animation:
+        marquee 28s linear infinite;
+}
+
+
+/* =================================
+   สมุด
+================================= */
+
+.book {
+    width:
+        min(
+            94vw,
+            650px
+        );
+
+    padding: 12px;
+
     position: relative;
 
-    z-index: 1;
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ef8fbd,
+            #d963a4
+        );
+
+    box-shadow:
+        0 20px 50px
+        rgba(
+            166,
+            66,
+            125,
+            0.25
+        );
 }
 
 
-/* =========================
+/* สันสมุด */
+
+.book::before {
+    content: "";
+
+    position: absolute;
+
+    left: 8px;
+
+    top: 12px;
+
+    bottom: 12px;
+
+    width: 9px;
+
+    border-radius: 10px;
+
+    background:
+        #c65392;
+}
+
+.book-ribbon {
+    color: #ffffff;
+
+    text-align: center;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    padding:
+        5px 0 8px;
+}
+
+
+/* =================================
+   หน้ากระดาษ
+================================= */
+
+.book-page {
+    min-height: 65vh;
+
+    padding: 17px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #fffafc;
+
+    border:
+        3px solid
+        #ffd4e7;
+
+    border-radius: 20px;
+
+    box-shadow:
+        inset 0 0 20px
+        rgba(
+            255,
+            160,
+            205,
+            0.12
+        );
+}
+
+.page-header {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 14px;
+
+    color:
+        #c95b94;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+/* =================================
+   กรอบรูป
+================================= */
+
+.photo-frame {
+    width: 100%;
+
+    height:
+        min(
+            58vh,
+            520px
+        );
+
+    padding: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        #ffe9f4;
+
+    border:
+        8px solid
+        #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 7px 22px
+        rgba(
+            150,
+            60,
+            110,
+            0.18
+        );
+
+    transform:
+        rotate(-1deg);
+}
+
+.photo-frame img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    opacity: 0;
+
+    transform:
+        scale(0.95);
+
+    transition:
+        opacity 0.65s ease,
+        transform 0.65s ease;
+}
+
+.photo-frame img.show {
+    opacity: 1;
+
+    transform:
+        scale(1);
+}
+
+
+/* =================================
+   จุดบอกจำนวนรูป
+================================= */
+
+.dots {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin:
+        16px 0;
+}
+
+.dot {
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        #f5bfd8;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.dot.active {
+    background:
+        #d95c9d;
+
+    transform:
+        scale(1.35);
+}
+
+
+/* =================================
+   หน้าสุดท้าย
+================================= */
+
+.ending-screen {
+    justify-content:
+        flex-start;
+
+    text-align: center;
+
+    padding-top: 55px;
+}
+
+.ending-title {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(
+            40px,
+            10vw,
+            72px
+        );
+
+    font-weight: 900;
+
+    color:
+        #d65c9b;
+
+    text-shadow:
+        3px 3px 0 #ffffff;
+}
+
+.ending-screen > p {
+    margin-top: 4px;
+
+    color:
+        #a95680;
+}
+
+
+/* =================================
+   รูปหัวใจ
+================================= */
+
+.heart-gallery {
+    position: relative;
+
+    width:
+        min(
+            92vw,
+            430px
+        );
+
+    height:
+        min(
+            92vw,
+            400px
+        );
+
+    margin:
+        18px auto;
+}
+
+.heart-gallery img {
+    position: absolute;
+
+    width: 88px;
+
+    height: 88px;
+
+    object-fit: cover;
+
+    padding: 3px;
+
+    background: #ffffff;
+
+    border:
+        2px solid
+        #ffb7d8;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            173,
+            69,
+            123,
+            0.25
+        );
+
+    opacity: 0;
+
+    animation:
+        heartAppear
+        0.8s
+        ease
+        forwards;
+}
+
+
+/* =================================
+   ข้อความจบ
+================================= */
+
+.ending-message {
+    padding:
+        18px
+        25px;
+
+    border:
+        2px solid
+        #ffc4df;
+
+    border-radius: 24px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(
+            166,
+            66,
+            125,
+            0.18
+        );
+
+    color:
+        #a54e7d;
+
+    font-weight: 700;
+
+    line-height: 1.8;
+}
+
+
+/* =================================
    Animation
-========================= */
+================================= */
 
-@keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+@keyframes bunnyFloat {
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes cakeFloat {
     0%,
     100% {
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 
     50% {
-        transform: translateY(-12px);
+        transform:
+            translateY(-10px);
     }
 }
 
-@keyframes imageAppear {
-    from {
+
+@keyframes countdownPop {
+
+    0% {
         opacity: 0;
 
         transform:
-            translateY(25px)
-            scale(0.92);
+            scale(0.4);
     }
 
-    to {
+    70% {
+        transform:
+            scale(1.12);
+    }
+
+    100% {
         opacity: 1;
 
         transform:
-            translateY(0)
             scale(1);
     }
 }
 
-@keyframes heartAppear {
+
+@keyframes titleAppear {
+
     from {
         opacity: 0;
 
         transform:
-            scale(0.4)
-            translateY(30px);
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(1.12);
+    }
+}
+
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0.5;
+
+        transform:
+            scale(1);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            scale(1.15);
+    }
+}
+
+
+@keyframes marquee {
+
+    from {
+        transform:
+            translateX(0);
+    }
+
+    to {
+        transform:
+            translateX(-100%);
+    }
+}
+
+
+@keyframes heartAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.3)
+            translateY(25px);
     }
 
     to {
@@ -528,52 +905,58 @@ body {
     }
 }
 
-@keyframes heartbeat {
-    0%,
-    100% {
-        transform: scale(1);
-    }
 
-    50% {
-        transform: scale(1.12);
-    }
-}
-
-
-/* =========================
-   มือถือ
-========================= */
+/* =================================
+   ปรับสำหรับมือถือ
+================================= */
 
 @media (max-width: 500px) {
 
-    .container {
-        padding: 12px;
+    .screen {
+        padding:
+            18px;
     }
 
-    .slideshow img {
-        height: 65vh;
+    .book-page {
+        min-height:
+            64vh;
+
+        padding:
+            13px;
     }
 
-    .letter {
-        padding: 25px 18px;
+    .photo-frame {
+        height:
+            52vh;
     }
 
-    .letter p {
-        font-size: 17px;
-        line-height: 1.9;
+    .note {
+        height:
+            58px;
     }
 
-    .heartGallery {
-        width: 320px;
-        height: 320px;
-
-        transform: scale(0.85);
-        transform-origin: top center;
-
-        margin-bottom: -30px;
+    .note-track span {
+        font-size:
+            14px;
     }
 
-    .ending {
-        padding-top: 80px;
+    .heart-gallery {
+        transform:
+            scale(0.82);
+
+        transform-origin:
+            top center;
+
+        margin-bottom:
+            -60px;
     }
+
+    .heart-gallery img {
+        width:
+            82px;
+
+        height:
+            82px;
+    }
+
 }
