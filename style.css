@@ -1483,4 +1483,310 @@ body {
     }
 
 }
-    
+
+/* =========================================
+   MY MELODY STYLE CHARACTERS
+========================================= */
+
+.melody-decoration {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 100;
+
+}
+
+
+/* ตัวละคร */
+
+.melody-character {
+
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    white-space: nowrap;
+
+    transform:
+        scale(var(--melody-scale));
+
+    filter:
+        drop-shadow(
+            0 3px 5px
+            rgba(255, 105, 180, .35)
+        );
+
+    animation:
+        melodyFloat
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* =========================================
+   การขยับตัวละคร
+========================================= */
+
+@keyframes melodyFloat {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(-6deg)
+            scale(var(--melody-scale));
+
+    }
+
+    25% {
+
+        transform:
+            translateY(-9px)
+            rotate(5deg)
+            scale(var(--melody-scale));
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-15px)
+            rotate(-4deg)
+            scale(var(--melody-scale));
+
+    }
+
+    75% {
+
+        transform:
+            translateY(-7px)
+            rotate(5deg)
+            scale(var(--melody-scale));
+
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-6deg)
+            scale(var(--melody-scale));
+
+    }
+
+}
+
+
+/* =========================================
+   HEART GALLERY
+========================================= */
+
+.heartGallery {
+
+    position: relative;
+
+    width: min(
+        92vw,
+        430px
+    );
+
+    height: min(
+        105vw,
+        500px
+    );
+
+    margin:
+        30px auto 0;
+
+    display: block;
+
+}
+
+
+/* รูปแต่ละรูป */
+
+.heart-photo {
+
+    position: absolute;
+
+    width: 82px;
+    height: 82px;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+
+    padding: 4px;
+
+    background: white;
+
+    box-shadow:
+        0 0 12px
+        rgba(255, 105, 180, .45),
+
+        0 6px 18px
+        rgba(70, 20, 80, .25);
+
+    transform:
+        translate(-50%, -50%)
+        scale(.3);
+
+    opacity: 0;
+
+    animation:
+        heartPhotoAppear
+        .8s
+        cubic-bezier(
+            .17,
+            .67,
+            .35,
+            1.35
+        )
+        forwards;
+
+}
+
+
+/* =========================================
+   รูปหัวใจค่อย ๆ ปรากฏ
+========================================= */
+
+@keyframes heartPhotoAppear {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.2)
+            rotate(-15deg);
+
+    }
+
+    70% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.08)
+            rotate(3deg);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1)
+            rotate(0deg);
+
+    }
+
+}
+
+
+/* =========================================
+   หัวใจลอยเบา ๆ หลังเรียงเสร็จ
+========================================= */
+
+.heartGallery.finished
+.heart-photo {
+
+    animation:
+        heartFloat
+        3.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes heartFloat {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            translateY(-5px);
+
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================
+   มือถือ
+========================================= */
+
+@media (max-width: 600px) {
+
+    .melody-character {
+
+        font-size: 22px;
+
+        width: 40px;
+        height: 40px;
+
+    }
+
+    .heartGallery {
+
+        width: 94vw;
+
+        height: 105vw;
+
+        max-height: 480px;
+
+    }
+
+    .heart-photo {
+
+        width: 65px;
+        height: 65px;
+
+        border-radius: 14px;
+
+        padding: 3px;
+
+    }
+
+}
