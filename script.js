@@ -508,216 +508,155 @@ function openEnding() {
 
 
 /* =========================================
-   MY MELODY STYLE DECORATIONS
-========================================= */
-
-const melodyTypes = [
-    "🎀🐰",
-    "🐰💗",
-    "🎀🐰✨",
-    "🐰🌸",
-    "💗🐰",
-    "🐰🎀💗",
-    "✨🐰",
-    "🐰💕"
-];
-
-function createMelodyCharacters() {
-
-    // ลบของเดิมก่อน
-    const old = document.querySelector(".melody-decoration");
-
-    if (old) {
-        old.remove();
-    }
-
-    const container =
-        document.createElement("div");
-
-    container.className =
-        "melody-decoration";
-
-    /*
-      ตัวละคร 12 ตัว
-      กระจายรอบหน้าจอ
-    */
-
-    const positions = [
-        [3, 12],
-        [88, 10],
-
-        [7, 29],
-        [92, 30],
-
-        [2, 50],
-        [90, 51],
-
-        [5, 70],
-        [93, 69],
-
-        [12, 87],
-        [82, 87],
-
-        [25, 9],
-        [72, 8]
-    ];
-
-    positions.forEach((position, index) => {
-
-        const character =
-            document.createElement("div");
-
-        character.className =
-            "melody-character";
-
-        /*
-          สุ่มตัวละคร
-        */
-
-        character.textContent =
-            melodyTypes[
-                Math.floor(
-                    Math.random() *
-                    melodyTypes.length
-                )
-            ];
-
-        /*
-          ตำแหน่ง
-        */
-
-        character.style.left =
-            `${position[0]}%`;
-
-        character.style.top =
-            `${position[1]}%`;
-
-        /*
-          สุ่มขนาด
-        */
-
-        const size =
-            0.75 +
-            Math.random() * 0.35;
-
-        character.style.setProperty(
-            "--melody-scale",
-            size
-        );
-
-        /*
-          แต่ละตัวขยับไม่พร้อมกัน
-        */
-
-        character.style.animationDelay =
-            `${Math.random() * 2.5}s`;
-
-        character.style.animationDuration =
-            `${3 + Math.random() * 2}s`;
-
-        container.appendChild(
-            character
-        );
-
-    });
-
-    document.body.appendChild(
-        container
-    );
-}
-
-
-/* =========================================
-   HEART GALLERY
+   สร้างหัวใจแบบสมมาตร
 ========================================= */
 
 function createHeartGallery() {
 
     const container =
-        document.getElementById(
-            "heartGallery"
-        );
+        document.getElementById("heartGallery");
 
-    if (!container) return;
+
+    if (!container) {
+
+        return;
+
+    }
+
 
     container.innerHTML = "";
 
-    /*
-       ตำแหน่งหัวใจแบบสมมาตร
 
-       10 รูป
+    /*
+       ตำแหน่งรูปทั้งหมด
+
+       ซ้ายและขวาออกแบบให้เป็นคู่
+       เพื่อให้หัวใจสมมาตร
     */
 
-    const heartPositions = [
+    const positions = [
 
-        // บน
-        [34, 8],
-        [66, 8],
+        /* ===== ส่วนโค้งด้านบน ===== */
 
-        // ไหล่
-        [22, 25],
-        [78, 25],
+        [28, 10],
+        [39, 7],
 
-        // กลาง
-        [28, 43],
-        [72, 43],
+        [61, 7],
+        [72, 10],
 
-        // ล่าง
-        [38, 61],
-        [62, 61],
 
-        [45, 78],
-        [55, 78]
+        /* ===== แถวที่ 2 ===== */
+
+        [21, 20],
+        [33, 18],
+        [44, 18],
+
+        [56, 18],
+        [67, 18],
+        [79, 20],
+
+
+        /* ===== แถวที่ 3 ===== */
+
+        [17, 31],
+        [28, 30],
+        [39, 29],
+
+        [50, 29],
+
+        [61, 29],
+        [72, 30],
+        [83, 31],
+
+
+        /* ===== แถวที่ 4 ===== */
+
+        [21, 42],
+        [33, 41],
+        [44, 41],
+
+        [56, 41],
+        [67, 41],
+        [79, 42],
+
+
+        /* ===== แถวที่ 5 ===== */
+
+        [29, 53],
+        [40, 52],
+
+        [50, 52],
+
+        [60, 52],
+        [71, 53],
+
+
+        /* ===== แถวที่ 6 ===== */
+
+        [38, 64],
+
+        [50, 65],
+
+        [62, 64],
+
+
+        /* ===== ปลายหัวใจ ===== */
+
+        [50, 78]
 
     ];
 
-    images.forEach(
-        (filename, index) => {
+
+    /*
+       สร้างรูปทีละรูป
+    */
+
+    positions.forEach(
+        (position, index) => {
 
             const img =
                 document.createElement("img");
 
-            img.src =
-                `assets/images/${filename}`;
-
-            img.className =
-                "heart-photo";
 
             /*
-              ใช้รูปซ้ำถ้าจำเป็น
+               ใช้รูปทั้ง 10 รูป
+               แล้ววนซ้ำอย่างเป็นระเบียบ
+            */
+
+            const imageIndex =
+                index % images.length;
+
+
+            img.src =
+                `assets/images/${images[imageIndex]}`;
+
+
+            img.alt =
+                "รูปความทรงจำ";
+
+
+            /*
+               ตำแหน่ง X / Y
             */
 
             img.style.left =
-                `${heartPositions[index][0]}%`;
+                `${position[0]}%`;
 
             img.style.top =
-                `${heartPositions[index][1]}%`;
+                `${position[1]}%`;
+
+
+            /*
+               ทำให้รูปค่อย ๆ ปรากฏ
+            */
 
             img.style.animationDelay =
-                `${index * 0.12}s`;
+                `${index * 0.06}s`;
+
 
             container.appendChild(img);
 
         }
     );
+
 }
-
-
-/* =========================================
-   เริ่มหน้าเว็บ
-========================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        createMelodyCharacters();
-
-        /*
-          ถ้ามี heartGallery อยู่แล้ว
-        */
-
-        createHeartGallery();
-
-    }
-);
