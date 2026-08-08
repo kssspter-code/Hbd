@@ -1,7 +1,17 @@
-const totalImages = 10;
+const images = [
+    "IMG_2277.jpeg",
+    "IMG_2278.jpeg",
+    "IMG_2279.jpeg",
+    "IMG_2280.jpeg",
+    "IMG_2281.jpeg",
+    "IMG_2282.jpeg",
+    "IMG_2283.jpeg",
+    "IMG_2284.jpeg",
+    "IMG_2285.jpeg",
+    "IMG_2286.jpeg"
+];
 
-let currentImage = 1;
-
+let currentImage = 0;
 let slideshowStarted = false;
 
 
@@ -11,29 +21,18 @@ let slideshowStarted = false;
 
 function startSurprise() {
 
-    const welcome =
-        document.getElementById("welcome");
-
-    const surprise =
-        document.getElementById("surprise");
-
+    const welcome = document.getElementById("welcome");
+    const surprise = document.getElementById("surprise");
 
     welcome.style.display = "none";
-
     surprise.style.display = "block";
-
 
     createHeartGallery();
 
-
     if (!slideshowStarted) {
-
         slideshowStarted = true;
-
         startSlideshow();
-
     }
-
 }
 
 
@@ -45,42 +44,30 @@ function startSlideshow() {
 
     setInterval(() => {
 
-        const image =
-            document.getElementById("slideImage");
-
-        const number =
-            document.getElementById("currentSlide");
-
+        const image = document.getElementById("slideImage");
+        const number = document.getElementById("currentSlide");
 
         image.classList.add("fade");
-
 
         setTimeout(() => {
 
             currentImage++;
 
-            if (currentImage > totalImages) {
-
-                currentImage = 1;
-
+            if (currentImage >= images.length) {
+                currentImage = 0;
             }
 
-
             image.src =
-                `assets/images/${currentImage}.jpeg`;
-
+                `assets/images/${images[currentImage]}`;
 
             number.textContent =
-                currentImage;
-
+                currentImage + 1;
 
             image.classList.remove("fade");
 
         }, 800);
 
-
     }, 3000);
-
 }
 
 
@@ -93,26 +80,20 @@ function createHeartGallery() {
     const container =
         document.getElementById("heartGallery");
 
-
     container.innerHTML = "";
 
-
-    for (let i = 1; i <= totalImages; i++) {
+    images.forEach((filename, index) => {
 
         const img =
             document.createElement("img");
 
-
         img.src =
-            `assets/images/${i}.jpeg`;
-
+            `assets/images/${filename}`;
 
         img.style.animationDelay =
-            `${i * 0.15}s`;
-
+            `${(index + 1) * 0.15}s`;
 
         container.appendChild(img);
 
-    }
-
+    });
 }
