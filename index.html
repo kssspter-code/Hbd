@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Moji ❤️ ที่รักของเค้า ><</title>
+    <title>Moji ❤️ ที่รักของเค้า &lt;&gt;</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
+    <!-- หัวใจลอย -->
     <div class="hearts"></div>
 
     <main class="container">
 
-        <!-- หน้าเปิด -->
+        <!-- =========================
+             หน้าแรก
+        ========================== -->
+
         <section class="welcome" id="welcome">
 
             <div class="cake">🎂</div>
@@ -24,7 +28,7 @@
 
             <h2>Moji ❤️</h2>
 
-            <p>ที่รักของเค้า &gt;&lt;</p>
+            <p>ที่รักของเค้า &lt;&gt;</p>
 
             <button onclick="startSurprise()">
                 เปิดของขวัญ 💝
@@ -33,15 +37,26 @@
         </section>
 
 
-        <!-- ส่วนเซอร์ไพรส์ -->
+        <!-- =========================
+             หน้าเซอร์ไพรส์
+        ========================== -->
+
         <section class="surprise" id="surprise">
 
             <h1>สุขสันต์วันเกิดนะคับ 🎂</h1>
 
-            <!-- Slideshow -->
+
+            <!-- =========================
+                 Slideshow
+            ========================== -->
+
             <div class="slideshow">
 
-                <img id="slideImage" src="assets/images/IMG_2277.jpeg">
+                <img
+                    id="slideImage"
+                    src="./assets/images/IMG_2277.jpeg"
+                    alt="ความทรงจำ"
+                >
 
                 <div class="slideNumber">
                     <span id="currentSlide">1</span> / 10
@@ -50,13 +65,17 @@
             </div>
 
 
-            <!-- ข้อความ -->
+            <!-- =========================
+                 ข้อความ
+            ========================== -->
+
             <div class="letter">
 
-                <h2>ถึง Moji ❤️</h2>
+                <h2>💫 ถึง Moji ❤️</h2>
 
                 <p>
-                    สุขสันต์วันเกิดนะคับบ ขอให้ปีต่อจากวันนี้และทุกๆวันเป็นวันที่ดีของเธอนะ
+                    สุขสันต์วันเกิดนะคับบ ขอให้ปีต่อจากวันนี้และทุกๆวัน
+                    เป็นวันที่ดีของเธอนะ
                     <br><br>
 
                     เค้าอยากให้เธอรักตัวเองมากๆ พักผ่อนเยอะๆ
@@ -77,33 +96,39 @@
             </div>
 
 
-            <!-- รูปทั้งหมด -->
+            <!-- =========================
+                 รูปความทรงจำ
+            ========================== -->
+
             <section class="memories">
 
                 <h2>ความทรงจำของเรา ❤️</h2>
 
                 <div class="gallery">
 
-                    <img src="assets/images/IMG_2277.jpeg">
-                    <img src="assets/images/IMG_2278.jpeg">
-                    <img src="assets/images/IMG_2279.jpeg">
-                    <img src="assets/images/IMG_2280.jpeg">
-                    <img src="assets/images/IMG_2281.jpeg">
-                    <img src="assets/images/IMG_2282.jpeg">
-                    <img src="assets/images/IMG_2283.jpeg">
-                    <img src="assets/images/IMG_2284.jpeg">
-                    <img src="assets/images/IMG_2285.jpeg">
-                    <img src="assets/images/IMG_2286.jpeg">
+                    <img src="./assets/images/IMG_2277.jpeg" alt="ความทรงจำ 1">
+                    <img src="./assets/images/IMG_2278.jpeg" alt="ความทรงจำ 2">
+                    <img src="./assets/images/IMG_2279.jpeg" alt="ความทรงจำ 3">
+                    <img src="./assets/images/IMG_2280.jpeg" alt="ความทรงจำ 4">
+                    <img src="./assets/images/IMG_2281.jpeg" alt="ความทรงจำ 5">
+                    <img src="./assets/images/IMG_2282.jpeg" alt="ความทรงจำ 6">
+                    <img src="./assets/images/IMG_2283.jpeg" alt="ความทรงจำ 7">
+                    <img src="./assets/images/IMG_2284.jpeg" alt="ความทรงจำ 8">
+                    <img src="./assets/images/IMG_2285.jpeg" alt="ความทรงจำ 9">
+                    <img src="./assets/images/IMG_2286.jpeg" alt="ความทรงจำ 10">
 
                 </div>
 
             </section>
 
 
-            <!-- ตอนจบ -->
+            <!-- =========================
+                 ตอนจบ
+            ========================== -->
+
             <section class="ending">
 
-                <h1>❤️</h1>
+                <div class="bigHeart">❤️</div>
 
                 <h2>Moji</h2>
 
@@ -111,11 +136,15 @@
                     ขอบคุณที่เข้ามาเป็นความสุขของเค้านะ
                 </p>
 
-                <div class="heartGallery" id="heartGallery">
 
-                    <!-- JavaScript จะนำรูปมาจัดเป็นรูปหัวใจ -->
+                <!-- JavaScript จะนำรูป 10 รูป
+                     มาเรียงเป็นรูปหัวใจ -->
 
-                </div>
+                <div
+                    class="heartGallery"
+                    id="heartGallery"
+                ></div>
+
 
                 <h2 class="finalText">
                     รักเธอที่สุดเลย ❤️
@@ -128,7 +157,7 @@
     </main>
 
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 
 </body>
 </html>
