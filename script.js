@@ -1,6 +1,6 @@
-/* =========================
-   รายชื่อรูปทั้งหมด
-========================= */
+/* =========================================
+   รายชื่อรูปทั้ง 10 รูป
+========================================= */
 
 const images = [
     "IMG_2277.jpeg",
@@ -16,264 +16,462 @@ const images = [
 ];
 
 
-let currentImage = 0;
-let slideshowStarted = false;
-
-
-/* =========================
-   สร้าง URL ของรูป
-========================= */
+/* =========================================
+   สร้าง Path ของรูป
+========================================= */
 
 function imagePath(filename) {
-
     return `./assets/images/${filename}`;
+}
+
+
+/* =========================================
+   ดึง Element จาก HTML
+========================================= */
+
+const countdownScreen =
+    document.getElementById("countdownScreen");
+
+const countdown =
+    document.getElementById("countdown");
+
+const titleScreen =
+    document.getElementById("titleScreen");
+
+const bookScreen =
+    document.getElementById("bookScreen");
+
+const endingScreen =
+    document.getElementById("endingScreen");
+
+const openBook =
+    document.getElementById("openBook");
+
+const nextPhoto =
+    document.getElementById("nextPhoto");
+
+const bookPhoto =
+    document.getElementById("bookPhoto");
+
+const pageCounter =
+    document.getElementById("pageCounter");
+
+const dots =
+    document.getElementById("dots");
+
+const heartGallery =
+    document.getElementById("heartGallery");
+
+
+/* =========================================
+   ตัวแปร
+========================================= */
+
+let currentPage = 0;
+
+let isOpening = false;
+
+
+/* =========================================
+   รอเวลา
+========================================= */
+
+function wait(milliseconds) {
+
+    return new Promise(
+        resolve =>
+            setTimeout(
+                resolve,
+                milliseconds
+            )
+    );
 
 }
 
 
-/* =========================
-   เริ่มเซอร์ไพรส์
-========================= */
+/* =========================================
+   Countdown
+   3 → 2 → 1
+========================================= */
 
-function startSurprise() {
+async function startCountdown() {
 
-    const welcome =
-        document.getElementById("welcome");
-
-    const surprise =
-        document.getElementById("surprise");
-
-
-    welcome.style.display = "none";
-
-    surprise.style.display = "block";
+    const numbers = [
+        "3",
+        "2",
+        "1"
+    ];
 
 
-    /* สร้างรูปหัวใจ */
+    for (
+        let i = 0;
+        i < numbers.length;
+        i++
+    ) {
 
-    createHeartGallery();
+        countdown.textContent =
+            numbers[i];
 
 
-    /* เริ่ม slideshow ครั้งเดียว */
+        /* รีเซ็ต Animation */
 
-    if (!slideshowStarted) {
+        countdown.style.animation =
+            "none";
 
-        slideshowStarted = true;
+        void countdown.offsetWidth;
 
-        startSlideshow();
+
+        countdown.style.animation =
+            "countdownPop 0.8s ease";
+
+
+        await wait(1000);
 
     }
 
 
-    /* เลื่อนลงไปยัง slideshow */
+    /* ซ่อนหน้า Countdown */
 
-    setTimeout(() => {
+    countdownScreen.classList.add(
+        "hidden"
+    );
 
-        document.querySelector(".slideshow")
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
 
-    }, 300);
+    /* แสดง Happy Birthday */
+
+    titleScreen.classList.remove(
+        "hidden"
+    );
 
 }
 
 
-/* =========================
-   Slideshow
-========================= */
+/* =========================================
+   เปิดสมุด
+========================================= */
 
-function startSlideshow() {
+openBook.addEventListener(
+    "click",
+    function () {
 
-    setInterval(() => {
-
-
-        const image =
-            document.getElementById("slideImage");
-
-        const number =
-            document.getElementById("currentSlide");
-
-
-        if (!image) {
+        if (isOpening) {
             return;
         }
 
-
-        /* เอฟเฟกต์ค่อย ๆ หาย */
-
-        image.classList.add("fade");
+        isOpening = true;
 
 
-        setTimeout(() => {
+        /* ซ่อนหน้า Happy Birthday */
+
+        titleScreen.classList.add(
+            "hidden"
+        );
 
 
-            currentImage++;
+        /* แสดงสมุด */
+
+        bookScreen.classList.remove(
+            "hidden"
+        );
 
 
-            if (
-                currentImage >= images.length
-            ) {
+        /* เริ่มจากรูปแรก */
 
-                currentImage = 0;
+        currentPage = 0;
 
-            }
+
+        showPhoto();
+
+
+        /* ปลดล็อก */
+
+        setTimeout(
+            () => {
+                isOpening = false;
+            },
+            500
+        );
+
+    }
+);
+
+
+/* =========================================
+   แสดงรูปในสมุด
+========================================= */
+
+function showPhoto() {
+
+    /* ซ่อนรูปก่อน */
+
+    bookPhoto.classList.remove(
+        "show"
+    );
+
+
+    setTimeout(
+        function () {
 
 
             /* เปลี่ยนรูป */
 
-            image.src =
+            bookPhoto.src =
                 imagePath(
-                    images[currentImage]
+                    images[currentPage]
                 );
 
 
-            /* เปลี่ยนเลข */
+            /* เปลี่ยนเลขหน้า */
 
-            if (number) {
+            pageCounter.textContent =
+                `${currentPage + 1} / ${images.length}`;
 
-                number.textContent =
-                    currentImage + 1;
+
+            /* เมื่อรูปโหลดเสร็จ */
+
+            bookPhoto.onload =
+                function () {
+
+                    bookPhoto.classList.add(
+                        "show"
+                    );
+
+                };
+
+
+        },
+        200
+    );
+
+
+    /* สร้างจุด */
+
+    createDots();
+
+}
+
+
+/* =========================================
+   จุดแสดงหน้าปัจจุบัน
+========================================= */
+
+function createDots() {
+
+    dots.innerHTML = "";
+
+
+    images.forEach(
+        function (_, index) {
+
+            const dot =
+                document.createElement(
+                    "span"
+                );
+
+
+            dot.className =
+                "dot";
+
+
+            if (
+                index === currentPage
+            ) {
+
+                dot.classList.add(
+                    "active"
+                );
 
             }
 
 
-            /* ตรวจว่ารูปโหลดได้หรือไม่ */
+            dots.appendChild(
+                dot
+            );
 
-            image.onload = () => {
-
-                image.classList.remove("fade");
-
-            };
-
-
-            image.onerror = () => {
-
-                console.error(
-                    "ไม่สามารถโหลดรูป:",
-                    image.src
-                );
-
-                image.classList.remove("fade");
-
-            };
-
-
-        }, 800);
-
-
-    }, 3000);
+        }
+    );
 
 }
 
 
-/* =========================
-   สร้างรูปหัวใจ
-========================= */
+/* =========================================
+   ปุ่มหน้าถัดไป
+========================================= */
 
-function createHeartGallery() {
+nextPhoto.addEventListener(
+    "click",
+    function () {
 
 
-    const container =
-        document.getElementById(
-            "heartGallery"
+        /* ถ้ายังมีรูปถัดไป */
+
+        if (
+            currentPage <
+            images.length - 1
+        ) {
+
+            currentPage++;
+
+            showPhoto();
+
+            return;
+
+        }
+
+
+        /* =================================
+           รูปสุดท้ายแล้ว
+           ไปหน้ารูปหัวใจ
+        ================================= */
+
+        bookScreen.classList.add(
+            "hidden"
         );
 
 
-    if (!container) {
-        return;
+        endingScreen.classList.remove(
+            "hidden"
+        );
+
+
+        createHeartGallery();
+
     }
+);
 
 
-    /* ล้างของเดิม */
+/* =========================================
+   สร้างรูปหัวใจ
+========================================= */
 
-    container.innerHTML = "";
+function createHeartGallery() {
+
+    heartGallery.innerHTML = "";
+
+
+    /*
+       ตำแหน่งรูปทั้ง 10 รูป
+
+       ❤️
+    */
+
+    const positions = [
+
+        /* รูปบนซ้าย */
+
+        {
+            x: 112,
+            y: 5
+        },
+
+
+        /* รูปบนขวา */
+
+        {
+            x: 215,
+            y: 5
+        },
+
+
+        /* แถวที่ 2 */
+
+        {
+            x: 58,
+            y: 75
+        },
+
+        {
+            x: 165,
+            y: 75
+        },
+
+        {
+            x: 272,
+            y: 75
+        },
+
+
+        /* แถวที่ 3 */
+
+        {
+            x: 58,
+            y: 157
+        },
+
+        {
+            x: 165,
+            y: 157
+        },
+
+        {
+            x: 272,
+            y: 157
+        },
+
+
+        /* ปลายหัวใจ */
+
+        {
+            x: 112,
+            y: 240
+        },
+
+        {
+            x: 215,
+            y: 240
+        }
+
+    ];
 
 
     images.forEach(
-        (filename, index) => {
+        function (
+            filename,
+            index
+        ) {
 
 
-            const img =
-                document.createElement("img");
-
-
-            /* Path รูป */
-
-            img.src =
-                imagePath(filename);
-
-
-            /* คำอธิบาย */
-
-            img.alt =
-                `ความทรงจำ ${index + 1}`;
-
-
-            /* เอฟเฟกต์ปรากฏทีละรูป */
-
-            img.style.animationDelay =
-                `${index * 0.15}s`;
-
-
-            /* ตรวจรูป */
-
-            img.onerror = () => {
-
-                console.error(
-                    "ไม่สามารถโหลดรูปหัวใจ:",
-                    img.src
+            const image =
+                document.createElement(
+                    "img"
                 );
 
-            };
 
+            /* Path */
 
-            container.appendChild(img);
-
-        }
-    );
-
-}
-
-
-/* =========================
-   ตรวจสอบรูปตอนเปิดเว็บ
-========================= */
-
-function preloadImages() {
-
-
-    images.forEach(
-        (filename) => {
-
-
-            const img =
-                new Image();
-
-
-            img.src =
-                imagePath(filename);
-
-
-            img.onload = () => {
-
-                console.log(
-                    "โหลดรูปสำเร็จ:",
+            image.src =
+                imagePath(
                     filename
                 );
 
-            };
+
+            /* Alt */
+
+            image.alt =
+                `ความทรงจำ ${index + 1}`;
 
 
-            img.onerror = () => {
+            /* ตำแหน่ง */
 
-                console.error(
-                    "โหลดรูปไม่สำเร็จ:",
-                    imagePath(filename)
-                );
+            image.style.left =
+                `${positions[index].x}px`;
 
-            };
+
+            image.style.top =
+                `${positions[index].y}px`;
+
+
+            /* ให้รูปปรากฏทีละรูป */
+
+            image.style.animationDelay =
+                `${index * 0.15}s`;
+
+
+            /* เพิ่มรูป */
+
+            heartGallery.appendChild(
+                image
+            );
 
         }
     );
@@ -281,15 +479,42 @@ function preloadImages() {
 }
 
 
-/* =========================
-   เริ่มโหลดรูป
-========================= */
+/* =========================================
+   Preload รูปทั้ง 10 รูป
+   ช่วยให้รูปเปลี่ยนได้ลื่นขึ้น
+========================================= */
+
+function preloadImages() {
+
+    images.forEach(
+        function (filename) {
+
+            const image =
+                new Image();
+
+
+            image.src =
+                imagePath(
+                    filename
+                );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   เริ่มต้นเว็บไซต์
+========================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    function () {
 
         preloadImages();
+
+        startCountdown();
 
     }
 );
