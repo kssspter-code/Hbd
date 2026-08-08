@@ -659,4 +659,218 @@ function createHeartGallery() {
         }
     );
 
+} 
+/* =========================================
+   MY MELODY STYLE DECORATIONS
+========================================= */
+
+const melodyTypes = [
+    "🎀🐰",
+    "🐰💗",
+    "🎀🐰✨",
+    "🐰🌸",
+    "💗🐰",
+    "🐰🎀💗",
+    "✨🐰",
+    "🐰💕"
+];
+
+function createMelodyCharacters() {
+
+    // ลบของเดิมก่อน
+    const old = document.querySelector(".melody-decoration");
+
+    if (old) {
+        old.remove();
+    }
+
+    const container =
+        document.createElement("div");
+
+    container.className =
+        "melody-decoration";
+
+    /*
+      ตัวละคร 12 ตัว
+      กระจายรอบหน้าจอ
+    */
+
+    const positions = [
+        [3, 12],
+        [88, 10],
+
+        [7, 29],
+        [92, 30],
+
+        [2, 50],
+        [90, 51],
+
+        [5, 70],
+        [93, 69],
+
+        [12, 87],
+        [82, 87],
+
+        [25, 9],
+        [72, 8]
+    ];
+
+    positions.forEach((position, index) => {
+
+        const character =
+            document.createElement("div");
+
+        character.className =
+            "melody-character";
+
+        /*
+          สุ่มตัวละคร
+        */
+
+        character.textContent =
+            melodyTypes[
+                Math.floor(
+                    Math.random() *
+                    melodyTypes.length
+                )
+            ];
+
+        /*
+          ตำแหน่ง
+        */
+
+        character.style.left =
+            `${position[0]}%`;
+
+        character.style.top =
+            `${position[1]}%`;
+
+        /*
+          สุ่มขนาด
+        */
+
+        const size =
+            0.75 +
+            Math.random() * 0.35;
+
+        character.style.setProperty(
+            "--melody-scale",
+            size
+        );
+
+        /*
+          แต่ละตัวขยับไม่พร้อมกัน
+        */
+
+        character.style.animationDelay =
+            `${Math.random() * 2.5}s`;
+
+        character.style.animationDuration =
+            `${3 + Math.random() * 2}s`;
+
+        container.appendChild(
+            character
+        );
+
+    });
+
+    document.body.appendChild(
+        container
+    );
 }
+
+
+/* =========================================
+   HEART GALLERY
+========================================= */
+
+function createHeartGallery() {
+
+    const container =
+        document.getElementById(
+            "heartGallery"
+        );
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    /*
+       ตำแหน่งหัวใจแบบสมมาตร
+
+       10 รูป
+    */
+
+    const heartPositions = [
+
+        // บน
+        [34, 8],
+        [66, 8],
+
+        // ไหล่
+        [22, 25],
+        [78, 25],
+
+        // กลาง
+        [28, 43],
+        [72, 43],
+
+        // ล่าง
+        [38, 61],
+        [62, 61],
+
+        [45, 78],
+        [55, 78]
+
+    ];
+
+    images.forEach(
+        (filename, index) => {
+
+            const img =
+                document.createElement("img");
+
+            img.src =
+                `assets/images/${filename}`;
+
+            img.className =
+                "heart-photo";
+
+            /*
+              ใช้รูปซ้ำถ้าจำเป็น
+            */
+
+            img.style.left =
+                `${heartPositions[index][0]}%`;
+
+            img.style.top =
+                `${heartPositions[index][1]}%`;
+
+            img.style.animationDelay =
+                `${index * 0.12}s`;
+
+            container.appendChild(img);
+
+        }
+    );
+}
+
+
+/* =========================================
+   เริ่มหน้าเว็บ
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        createMelodyCharacters();
+
+        /*
+          ถ้ามี heartGallery อยู่แล้ว
+        */
+
+        createHeartGallery();
+
+    }
+);
