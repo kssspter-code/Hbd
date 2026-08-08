@@ -4,158 +4,264 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Moji ❤️ ที่รักของเค้า &lt;&gt;</title>
+    <title>Happy Birthday Moji ❤️</title>
 
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-    <!-- หัวใจลอย -->
-    <div class="hearts"></div>
-
-    <main class="container">
-
-        <!-- =========================
-             หน้าแรก
-        ========================== -->
-
-        <section class="welcome" id="welcome">
-
-            <div class="cake">🎂</div>
-
-            <h1>Happy Birthday</h1>
-
-            <h2>Moji ❤️</h2>
-
-            <p>ที่รักของเค้า &lt;&gt;</p>
-
-            <button onclick="startSurprise()">
-                เปิดของขวัญ 💝
-            </button>
-
-        </section>
+    <!-- พื้นหลังหัวใจ -->
+    <div class="bg-hearts"></div>
 
 
-        <!-- =========================
-             หน้าเซอร์ไพรส์
-        ========================== -->
+    <!-- =================================
+         หน้าแรก : Countdown
+    ================================== -->
 
-        <section class="surprise" id="surprise">
+    <section
+        id="countdownScreen"
+        class="screen countdown-screen"
+    >
 
-            <h1>สุขสันต์วันเกิดนะคับ 🎂</h1>
+        <div class="bunny">
+            🐰
+        </div>
+
+        <div
+            id="countdown"
+            class="countdown"
+        >
+            3
+        </div>
+
+        <p class="tiny">
+            a little birthday surprise...
+        </p>
+
+    </section>
 
 
-            <!-- =========================
-                 Slideshow
-            ========================== -->
 
-            <div class="slideshow">
+    <!-- =================================
+         หน้า Happy Birthday
+    ================================== -->
 
-                <img
-                    id="slideImage"
-                    src="./assets/images/IMG_2277.jpeg"
-                    alt="ความทรงจำ"
-                >
+    <section
+        id="titleScreen"
+        class="screen title-screen hidden"
+    >
 
-                <div class="slideNumber">
-                    <span id="currentSlide">1</span> / 10
-                </div>
+        <div class="sparkles">
+            ✦ ˚｡⋆
+        </div>
 
+
+        <div class="title-line">
+            Happy
+        </div>
+
+
+        <div class="title-line">
+            Birthday
+        </div>
+
+
+        <div class="title-line">
+            to
+        </div>
+
+
+        <div class="title-line name">
+            Moji
+        </div>
+
+
+        <div class="title-heart">
+            ❤️
+        </div>
+
+
+        <button
+            id="openBook"
+            class="cute-btn"
+        >
+            เปิดสมุดของขวัญ 🎀
+        </button>
+
+    </section>
+
+
+
+    <!-- =================================
+         หน้าสมุดภาพ
+    ================================== -->
+
+    <section
+        id="bookScreen"
+        class="screen book-screen hidden"
+    >
+
+
+        <!-- โน้ตคำอวยพรด้านบน -->
+
+        <div class="note">
+
+            <div class="note-pin">
+                ♡
             </div>
 
 
-            <!-- =========================
-                 ข้อความ
-            ========================== -->
+            <div class="note-track">
 
-            <div class="letter">
+                <span>
 
-                <h2>💫 ถึง Moji ❤️</h2>
-
-                <p>
-                    สุขสันต์วันเกิดนะคับบ ขอให้ปีต่อจากวันนี้และทุกๆวัน
+                    สุขสันต์วันเกิดนะคับบ ♡
+                    ขอให้ปีต่อจากวันนี้และทุกๆวัน
                     เป็นวันที่ดีของเธอนะ
-                    <br><br>
-
-                    เค้าอยากให้เธอรักตัวเองมากๆ พักผ่อนเยอะๆ
-                    กินของอร่อยบ่อยๆ แล้วก็มีความสุขในทุกๆวัน
+                    เค้าอยากให้เธอรักตัวเองมากๆ
+                    พักผ่อนเยอะๆ
+                    กินของอร่อยบ่อยๆ
+                    แล้วก็มีความสุขในทุกๆวัน
                     เหมือนที่เธอทำให้เค้ามีความสุขนะ
-                    <br><br>
-
                     เค้ามีความสุขมากที่มีเธอเข้ามาในชีวิต
                     ขอบคุณที่ทำให้ทุกๆวันของเค้าเป็นวันที่ดีขึ้นนะ
-                    <br><br>
-
                     อยากให้แฟนอยู่กับเค้าแบบนี้ไปนานๆนะคับ
-                    <br><br>
+                    เค้ารักเธอที่สุดเลย ❤️
 
-                    เค้ารักเธอที่สุดเลย ❤️ &lt;3
-                </p>
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- สมุด -->
+
+        <div class="book">
+
+
+            <div class="book-ribbon">
+
+                MOJI ♡
 
             </div>
 
 
-            <!-- =========================
-                 รูปความทรงจำ
-            ========================== -->
 
-            <section class="memories">
+            <div class="book-page">
 
-                <h2>ความทรงจำของเรา ❤️</h2>
 
-                <div class="gallery">
+                <!-- หัวกระดาษ -->
 
-                    <img src="./assets/images/IMG_2277.jpeg" alt="ความทรงจำ 1">
-                    <img src="./assets/images/IMG_2278.jpeg" alt="ความทรงจำ 2">
-                    <img src="./assets/images/IMG_2279.jpeg" alt="ความทรงจำ 3">
-                    <img src="./assets/images/IMG_2280.jpeg" alt="ความทรงจำ 4">
-                    <img src="./assets/images/IMG_2281.jpeg" alt="ความทรงจำ 5">
-                    <img src="./assets/images/IMG_2282.jpeg" alt="ความทรงจำ 6">
-                    <img src="./assets/images/IMG_2283.jpeg" alt="ความทรงจำ 7">
-                    <img src="./assets/images/IMG_2284.jpeg" alt="ความทรงจำ 8">
-                    <img src="./assets/images/IMG_2285.jpeg" alt="ความทรงจำ 9">
-                    <img src="./assets/images/IMG_2286.jpeg" alt="ความทรงจำ 10">
+                <div class="page-header">
+
+                    <span>
+                        ♡ our memories ♡
+                    </span>
+
+                    <span id="pageCounter">
+                        1 / 10
+                    </span>
 
                 </div>
 
-            </section>
 
 
-            <!-- =========================
-                 ตอนจบ
-            ========================== -->
+                <!-- รูป -->
 
-            <section class="ending">
+                <div class="photo-frame">
 
-                <div class="bigHeart">❤️</div>
+                    <img
+                        id="bookPhoto"
+                        src="./assets/images/IMG_2277.jpeg"
+                        alt="memory"
+                    >
 
-                <h2>Moji</h2>
-
-                <p>
-                    ขอบคุณที่เข้ามาเป็นความสุขของเค้านะ
-                </p>
+                </div>
 
 
-                <!-- JavaScript จะนำรูป 10 รูป
-                     มาเรียงเป็นรูปหัวใจ -->
+
+                <!-- จุดบอกหน้าปัจจุบัน -->
 
                 <div
-                    class="heartGallery"
-                    id="heartGallery"
+                    class="dots"
+                    id="dots"
                 ></div>
 
 
-                <h2 class="finalText">
-                    รักเธอที่สุดเลย ❤️
-                </h2>
 
-            </section>
+                <!-- ปุ่มเปลี่ยนรูป -->
 
-        </section>
+                <button
+                    id="nextPhoto"
+                    class="cute-btn small"
+                >
+                    หน้าถัดไป ♡
+                </button>
 
-    </main>
 
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         หน้าสุดท้าย : รูปหัวใจ
+    ================================== -->
+
+    <section
+        id="endingScreen"
+        class="screen ending-screen hidden"
+    >
+
+
+        <div class="ending-title">
+
+            for you, Moji ♡
+
+        </div>
+
+
+        <p>
+
+            ความทรงจำทั้งหมดของเรา
+
+        </p>
+
+
+
+        <!--
+            JavaScript จะนำรูปทั้ง 10 รูป
+            มาเรียงเป็นรูปหัวใจตรงนี้
+        -->
+
+        <div
+            id="heartGallery"
+            class="heart-gallery"
+        ></div>
+
+
+
+        <div class="ending-message">
+
+            ขอบคุณที่เข้ามาเป็นความสุขของเค้านะ
+            <br>
+
+            เค้ารักเธอที่สุดเลย ❤️
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- JavaScript -->
 
     <script src="./script.js"></script>
 
