@@ -1,228 +1,264 @@
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
+    margin: 0;
     min-height: 100vh;
-    background:
-        radial-gradient(circle at top, #3b174d, #14091c 60%, #08050c);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
     color: white;
-    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #52205f 0%,
+            #24102d 40%,
+            #08060d 100%
+        );
+
     overflow-x: hidden;
 }
 
 
-/* --------------------
-   พื้นฐาน
--------------------- */
+/* =========================
+   Container
+========================= */
 
 .container {
     width: 100%;
-    max-width: 900px;
+    max-width: 700px;
     margin: auto;
     padding: 20px;
-    text-align: center;
 }
 
 
-/* --------------------
-   หน้าเปิด
--------------------- */
+/* =========================
+   หน้าแรก
+========================= */
 
 .welcome {
     min-height: 100vh;
 
     display: flex;
     flex-direction: column;
+
     justify-content: center;
     align-items: center;
 
-    animation: fadeIn 1.5s ease;
+    text-align: center;
+
+    padding: 30px;
 }
 
 .cake {
-    font-size: 90px;
-    animation: floating 2s infinite ease-in-out;
+    font-size: 80px;
+
+    animation:
+        cakeFloat 2s ease-in-out infinite;
 }
 
 .welcome h1 {
-    font-size: clamp(38px, 8vw, 70px);
-    margin: 20px 0 10px;
+    margin: 15px 0 5px;
 
-    background: linear-gradient(
-        90deg,
-        #ff8fc7,
-        #ffffff,
-        #ffb8df
-    );
+    font-size: clamp(40px, 10vw, 70px);
 
-    -webkit-background-clip: text;
-    color: transparent;
+    text-shadow:
+        0 0 20px rgba(255, 130, 220, 0.8);
 }
 
 .welcome h2 {
+    margin: 5px;
+
     font-size: 35px;
-    color: #ff9bd3;
+
+    color: #ff9edc;
 }
 
 .welcome p {
-    margin: 10px 0 30px;
-    color: #ffd5ed;
+    font-size: 22px;
 }
 
+.welcome button {
+    margin-top: 25px;
 
-/* --------------------
-   ปุ่ม
--------------------- */
+    padding: 16px 30px;
 
-button {
     border: none;
-    padding: 15px 35px;
+    border-radius: 40px;
 
-    border-radius: 50px;
-
-    background: linear-gradient(
-        90deg,
-        #ff4fa3,
-        #ff8fc7
-    );
+    font-size: 18px;
+    font-weight: bold;
 
     color: white;
 
-    font-size: 18px;
+    background:
+        linear-gradient(
+            135deg,
+            #ff5db1,
+            #9c4dff
+        );
+
+    box-shadow:
+        0 0 25px rgba(255, 80, 190, 0.5);
 
     cursor: pointer;
 
-    box-shadow:
-        0 0 20px rgba(255, 105, 180, .5);
-
-    transition: .3s;
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s;
 }
 
-button:hover {
-    transform: scale(1.08);
+.welcome button:active {
+    transform: scale(0.95);
 }
 
 
-/* --------------------
+/* =========================
    Surprise
--------------------- */
+========================= */
 
 .surprise {
     display: none;
 
-    animation: fadeIn 1.5s ease;
+    text-align: center;
+
+    animation: appear 1s ease;
+}
+
+.surprise > h1 {
+    margin-top: 20px;
+
+    font-size: clamp(30px, 8vw, 50px);
+
+    text-shadow:
+        0 0 20px rgba(255, 130, 220, 0.8);
 }
 
 
-/* --------------------
+/* =========================
    Slideshow
--------------------- */
+========================= */
 
 .slideshow {
     position: relative;
 
-    width: min(90vw, 550px);
-    height: min(90vw, 550px);
+    width: 100%;
 
     margin: 30px auto;
 
-    border-radius: 25px;
+    border-radius: 35px;
 
     overflow: hidden;
 
+    background: #24132c;
+
+    border: 1px solid rgba(255, 180, 240, 0.35);
+
     box-shadow:
-        0 0 40px rgba(255, 95, 180, .35);
+        0 0 35px rgba(255, 50, 190, 0.25);
 }
 
 .slideshow img {
+    display: block;
+
     width: 100%;
-    height: 100%;
 
-    object-fit: cover;
+    height: min(75vh, 650px);
 
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
+    object-fit: contain;
+
+    background: #1d1025;
 
     opacity: 1;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
 }
 
 .slideshow img.fade {
     opacity: 0;
-    transform: scale(1.08);
+
+    transform: scale(0.96);
 }
 
 .slideNumber {
     position: absolute;
 
-    bottom: 15px;
     right: 15px;
+    bottom: 15px;
 
-    background: rgba(0,0,0,.5);
-
-    padding: 7px 15px;
+    padding: 10px 18px;
 
     border-radius: 30px;
 
-    font-size: 14px;
-}
-
-
-/* --------------------
-   Letter
--------------------- */
-
-.letter {
-    max-width: 700px;
-
-    margin: 50px auto;
-
-    padding: 30px;
-
-    border-radius: 25px;
-
-    background: rgba(255,255,255,.08);
-
-    border: 1px solid rgba(255,255,255,.15);
-
-    box-shadow:
-        0 0 30px rgba(255,100,190,.12);
-
-    animation: fadeUp 1.5s ease;
-}
-
-.letter h2 {
-    color: #ff9ed3;
-    margin-bottom: 20px;
-}
-
-.letter p {
-    line-height: 2;
-
-    color: #ffe8f5;
+    background: rgba(0, 0, 0, 0.65);
 
     font-size: 16px;
 }
 
 
-/* --------------------
+/* =========================
+   Letter
+========================= */
+
+.letter {
+    margin-top: 40px;
+
+    padding: 30px 25px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(90, 40, 105, 0.35);
+
+    border:
+        1px solid rgba(255, 170, 235, 0.25);
+
+    box-shadow:
+        0 0 30px rgba(255, 70, 190, 0.15);
+}
+
+.letter h2 {
+    color: #ff9edc;
+
+    font-size: 30px;
+
+    margin-top: 0;
+}
+
+.letter p {
+    font-size: 18px;
+
+    line-height: 2;
+
+    margin: 0;
+}
+
+
+/* =========================
    Memories
--------------------- */
+========================= */
 
 .memories {
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 .memories h2 {
-    color: #ff9ed3;
-    margin-bottom: 30px;
+    color: #ff9edc;
+
+    font-size: 30px;
 }
-
-
-/* รูปทั้งหมด */
 
 .gallery {
     display: grid;
@@ -230,7 +266,9 @@ button:hover {
     grid-template-columns:
         repeat(2, 1fr);
 
-    gap: 15px;
+    gap: 12px;
+
+    margin-top: 25px;
 }
 
 .gallery img {
@@ -242,259 +280,226 @@ button:hover {
 
     border-radius: 18px;
 
+    border:
+        1px solid rgba(255, 170, 235, 0.35);
+
     opacity: 0;
 
-    transform:
-        translateY(40px)
-        scale(.9);
-
     animation:
-        photoAppear 1s ease forwards;
+        imageAppear 0.8s ease forwards;
 
     box-shadow:
-        0 5px 25px rgba(0,0,0,.3);
+        0 0 15px rgba(255, 70, 190, 0.2);
 }
 
 
-/* ทำให้รูปปรากฏทีละรูป */
-
-.gallery img:nth-child(1) {
-    animation-delay: .2s;
-}
-
-.gallery img:nth-child(2) {
-    animation-delay: .4s;
-}
-
-.gallery img:nth-child(3) {
-    animation-delay: .6s;
-}
-
-.gallery img:nth-child(4) {
-    animation-delay: .8s;
-}
-
-.gallery img:nth-child(5) {
-    animation-delay: 1s;
-}
-
-.gallery img:nth-child(6) {
-    animation-delay: 1.2s;
-}
-
-.gallery img:nth-child(7) {
-    animation-delay: 1.4s;
-}
-
-.gallery img:nth-child(8) {
-    animation-delay: 1.6s;
-}
-
-.gallery img:nth-child(9) {
-    animation-delay: 1.8s;
-}
-
-.gallery img:nth-child(10) {
-    animation-delay: 2s;
-}
-
-
-/* --------------------
+/* =========================
    Ending
--------------------- */
+========================= */
 
 .ending {
-    margin-top: 120px;
+    min-height: 100vh;
 
-    min-height: 700px;
+    padding:
+        100px
+        10px
+        100px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
+    text-align: center;
 }
 
-.ending > h1 {
-    font-size: 70px;
+.bigHeart {
+    font-size: 100px;
 
     animation:
-        heartBeat 1.5s infinite;
+        heartbeat 1.5s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(255, 50, 120, 0.8)
+        );
 }
 
 .ending h2 {
-    color: #ff9ed3;
-    margin: 15px;
+    font-size: 35px;
+
+    color: #ff9edc;
 }
 
 .ending p {
-    color: #ffd8ed;
+    font-size: 18px;
 }
 
 
-/* --------------------
-   Heart Gallery
--------------------- */
+/* =========================
+   รูปหัวใจ
+========================= */
 
 .heartGallery {
     position: relative;
 
-    width: 500px;
-    height: 500px;
+    width: 360px;
+    height: 360px;
 
-    max-width: 90vw;
-    max-height: 90vw;
-
-    margin: 50px auto;
+    margin:
+        40px auto
+        20px;
 }
 
 .heartGallery img {
     position: absolute;
 
-    width: 100px;
-    height: 100px;
+    width: 105px;
+    height: 105px;
 
     object-fit: cover;
 
-    border-radius: 15px;
+    border-radius: 20px;
+
+    border:
+        2px solid rgba(255, 170, 235, 0.65);
 
     box-shadow:
-        0 0 15px rgba(255,100,190,.4);
+        0 0 20px rgba(255, 60, 190, 0.55);
 
     opacity: 0;
 
-    transform: scale(.2);
-
     animation:
-        heartAppear .8s ease forwards;
+        heartAppear 0.8s ease forwards;
 }
 
 
-/* ตำแหน่งรูปหัวใจ */
+/*
+   ตำแหน่งรูป 10 รูป
+   ให้เป็นรูปหัวใจ
+*/
 
 .heartGallery img:nth-child(1) {
-    left: 150px;
-    top: 20px;
+    left: 75px;
+    top: 0;
 }
 
 .heartGallery img:nth-child(2) {
-    left: 250px;
-    top: 20px;
+    left: 180px;
+    top: 0;
 }
 
 .heartGallery img:nth-child(3) {
-    left: 100px;
-    top: 100px;
+    left: 25px;
+    top: 90px;
 }
 
 .heartGallery img:nth-child(4) {
-    left: 200px;
-    top: 100px;
+    left: 130px;
+    top: 90px;
 }
 
 .heartGallery img:nth-child(5) {
-    left: 300px;
-    top: 100px;
+    left: 235px;
+    top: 90px;
 }
 
 .heartGallery img:nth-child(6) {
-    left: 150px;
+    left: 75px;
     top: 180px;
 }
 
 .heartGallery img:nth-child(7) {
-    left: 250px;
+    left: 180px;
     top: 180px;
 }
 
 .heartGallery img:nth-child(8) {
-    left: 200px;
-    top: 260px;
+    left: 130px;
+    top: 270px;
 }
 
 .heartGallery img:nth-child(9) {
-    left: 250px;
-    top: 260px;
+    left: 25px;
+    top: 180px;
 }
 
 .heartGallery img:nth-child(10) {
-    left: 225px;
-    top: 340px;
+    left: 235px;
+    top: 180px;
 }
 
 
-/* --------------------
-   Floating Hearts
--------------------- */
+.finalText {
+    margin-top: 60px;
 
-.hearts::before,
-.hearts::after {
-    content: "❤️ 💕 💗 💖 ✨";
+    color: #ff8fd8 !important;
 
+    text-shadow:
+        0 0 20px rgba(255, 90, 200, 0.7);
+}
+
+
+/* =========================
+   หัวใจลอย
+========================= */
+
+.hearts {
     position: fixed;
 
-    left: 10%;
-
-    top: 100%;
-
-    font-size: 25px;
-
-    animation:
-        floatingHearts 8s linear infinite;
-
-    opacity: .5;
+    inset: 0;
 
     pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 0;
 }
 
-.hearts::after {
-    left: 70%;
+.container {
+    position: relative;
 
-    animation-delay: 3s;
+    z-index: 1;
 }
 
 
-/* --------------------
+/* =========================
    Animation
--------------------- */
+========================= */
 
-@keyframes fadeIn {
-
+@keyframes appear {
     from {
         opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-
-}
-
-@keyframes fadeUp {
-
-    from {
-        opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(20px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
 
-@keyframes floating {
-
-    0%,100% {
+@keyframes cakeFloat {
+    0%,
+    100% {
         transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-15px);
+        transform: translateY(-12px);
     }
-
 }
 
-@keyframes photoAppear {
+@keyframes imageAppear {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.92);
+    }
 
     to {
         opacity: 1;
@@ -503,75 +508,72 @@ button:hover {
             translateY(0)
             scale(1);
     }
-
 }
 
 @keyframes heartAppear {
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.4)
+            translateY(30px);
+    }
 
     to {
         opacity: 1;
-        transform: scale(1);
-    }
 
+        transform:
+            scale(1)
+            translateY(0);
+    }
 }
 
-@keyframes heartBeat {
-
-    0%,100% {
+@keyframes heartbeat {
+    0%,
+    100% {
         transform: scale(1);
     }
 
     50% {
-        transform: scale(1.2);
+        transform: scale(1.12);
     }
-
-}
-
-@keyframes floatingHearts {
-
-    from {
-        transform:
-            translateY(0)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translateY(-120vh)
-            rotate(360deg);
-    }
-
 }
 
 
-/* --------------------
+/* =========================
    มือถือ
--------------------- */
+========================= */
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
 
     .container {
-        padding: 15px;
+        padding: 12px;
     }
 
-    .gallery {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .heartGallery {
-        transform: scale(.7);
-        transform-origin: top center;
-
-        margin-bottom: -120px;
+    .slideshow img {
+        height: 65vh;
     }
 
     .letter {
-        padding: 20px;
+        padding: 25px 18px;
     }
 
     .letter p {
-        font-size: 15px;
+        font-size: 17px;
+        line-height: 1.9;
     }
 
+    .heartGallery {
+        width: 320px;
+        height: 320px;
+
+        transform: scale(0.85);
+        transform-origin: top center;
+
+        margin-bottom: -30px;
+    }
+
+    .ending {
+        padding-top: 80px;
+    }
 }
